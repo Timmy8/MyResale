@@ -1,31 +1,25 @@
 package com.example.myresale.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@ToString
 public class Item {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private long id;
-
-    @NotNull
     private String name;
-
-
     private String description;
-
-    @NotNull
-    @DecimalMin(value = "10.0")
-    @DecimalMax(value = "1000.0")
+    private String author;
     private BigDecimal price;
-
     private String imageURL;
 }

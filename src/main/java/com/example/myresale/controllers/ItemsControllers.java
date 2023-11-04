@@ -1,7 +1,11 @@
 package com.example.myresale.controllers;
 
+import com.example.myresale.entities.DeleteRequestDTO;
 import com.example.myresale.entities.Item;
+import com.example.myresale.entities.RequestItemDTO;
 import com.example.myresale.services.InteractionWithItemService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,14 +34,22 @@ public class ItemsControllers {
     }
 
     @PostMapping
-    public ResponseEntity<?> addItem(@RequestBody Item item){
+    public ResponseEntity<?> addItem(@RequestBody @Valid RequestItemDTO item){
+        String url = "http://localhost:8080/";
         Item createdItem = itemService.addItem(item);
-        long createdItemId = createdItem.getId();
-        URI uri = URI.create("http://localhost:8080/" + createdItemId);
+        URI uri = URI.create(url + createdItem.getId());
 
         return ResponseEntity
                 .created(uri)
                 .body(createdItem);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteItem(@RequestBody @Valid DeleteRequestDTO dto){
+        Item item = itemService.deleteItem(dto.getId());
+        return ResponseEntity
+                .ok()
+                .body("Item: " + item + " deleted with reason\"" + dto.getReason() +"\"");
     }
 
 }
