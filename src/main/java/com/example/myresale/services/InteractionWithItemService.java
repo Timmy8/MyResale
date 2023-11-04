@@ -1,9 +1,11 @@
 package com.example.myresale.services;
 
 import com.example.myresale.entities.Item;
+import com.example.myresale.entities.RequestItemDTO;
 import com.example.myresale.exceptions.ItemNotFoundException;
 import com.example.myresale.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,7 +25,23 @@ public class InteractionWithItemService {
         return repository.findById(id).orElseThrow(()-> new ItemNotFoundException(id));
     }
 
-    public Item addItem(Item item){
+    public Item addItem(RequestItemDTO itemDTO){
+        Item item = Item.builder()
+                .name(itemDTO.getName())
+                .description(itemDTO.getDescription())
+                .author(itemDTO.getAuthor())
+                .price(itemDTO.getPrice())
+                .imageURL(itemDTO.getImageURL())
+                .build();
+
         return repository.save(item);
+    }
+
+    @Transactional
+    public Item deleteItem(long id){
+        Item item = findItemById(id);
+        repository.deleteItemById(id);
+
+        return item;
     }
 }
