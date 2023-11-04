@@ -1,12 +1,14 @@
 package com.example.myresale.entities;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class RequestItemDTO {
+@AllArgsConstructor
+public class CreateItemRequestDTO {
     @NotNull(message = "Incorrect name: name can't be null!")
     @NotBlank(message = "Incorrect name: name can't be blank!")
     @Size(min = 5, max = 30, message = "Incorrect name: must be 5 - 30 symbols!")
@@ -24,4 +26,5 @@ public class RequestItemDTO {
     private BigDecimal price;
 
     private String imageURL;
+
 }

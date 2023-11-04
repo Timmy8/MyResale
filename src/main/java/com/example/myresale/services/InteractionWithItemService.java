@@ -1,7 +1,7 @@
 package com.example.myresale.services;
 
 import com.example.myresale.entities.Item;
-import com.example.myresale.entities.RequestItemDTO;
+import com.example.myresale.entities.CreateItemRequestDTO;
 import com.example.myresale.exceptions.ItemNotFoundException;
 import com.example.myresale.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class InteractionWithItemService {
         return repository.findById(id).orElseThrow(()-> new ItemNotFoundException(id));
     }
 
-    public Item addItem(RequestItemDTO itemDTO){
+    public Item addItem(CreateItemRequestDTO itemDTO){
         Item item = Item.builder()
                 .name(itemDTO.getName())
                 .description(itemDTO.getDescription())

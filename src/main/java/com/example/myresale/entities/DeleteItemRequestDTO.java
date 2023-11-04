@@ -1,10 +1,12 @@
 package com.example.myresale.entities;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class DeleteRequestDTO {
+@AllArgsConstructor
+public class DeleteItemRequestDTO {
     private long id;
 
     @NotNull(message = "Deleting reason can't be null!")
