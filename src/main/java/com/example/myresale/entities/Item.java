@@ -2,8 +2,10 @@ package com.example.myresale.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -15,7 +17,7 @@ import java.math.BigDecimal;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String name;
     private String description;

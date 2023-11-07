@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
+    Logger logger = Logger.getLogger(GlobalControllerExceptionHandler.class.getName());
 
     @ExceptionHandler(ItemNotFoundException.class)
     public ResponseEntity<String> itemNotFoundExceptionHandler(ItemNotFoundException exception){
+        logger.info(exception.getMessage());
         return ResponseEntity
                 .badRequest()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -29,6 +32,7 @@ public class GlobalControllerExceptionHandler {
         List<String> errors = new ArrayList<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> errors.add(error.getDefaultMessage()));
 
+        logger.info(ex.getMessage());
         return ResponseEntity
                 .badRequest()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -37,6 +41,7 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler(HttpMessageConversionException.class)
     public ResponseEntity<String> HttpBodyConversionExceptionHandler(HttpMessageConversionException ex){
+        logger.info(ex.getMessage());
         return ResponseEntity
                 .badRequest()
                 .contentType(MediaType.APPLICATION_JSON)

@@ -1,7 +1,7 @@
 package com.example.myresale.services;
 
 import com.example.myresale.entities.Item;
-import com.example.myresale.entities.CreateItemRequestDTO;
+import com.example.myresale.entities.DTOs.CreateItemRequestDTO;
 import com.example.myresale.exceptions.ItemNotFoundException;
 import com.example.myresale.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class InteractionWithItemService {
+public class ItemService {
     private final ItemRepository repository;
 
-    public InteractionWithItemService(ItemRepository repository) {
+    public ItemService(ItemRepository repository) {
         this.repository = repository;
     }
 
@@ -25,6 +25,7 @@ public class InteractionWithItemService {
         return repository.findById(id).orElseThrow(()-> new ItemNotFoundException(id));
     }
 
+    @Transactional
     public Item addItem(CreateItemRequestDTO itemDTO){
         Item item = Item.builder()
                 .name(itemDTO.getName())

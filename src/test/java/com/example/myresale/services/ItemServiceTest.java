@@ -1,41 +1,33 @@
 package com.example.myresale.services;
 
-import com.example.myresale.entities.CreateItemRequestDTO;
 import com.example.myresale.entities.Item;
 import com.example.myresale.repositories.ItemRepository;
-import org.hibernate.validator.internal.metadata.aggregated.FieldCascadable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
+import static com.example.myresale.testData.TestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class InteractionWithItemServiceTest {
+class ItemServiceTest {
     @Mock
     ItemRepository itemRepository;
 
     @InjectMocks
-    InteractionWithItemService service;
+    ItemService service;
 
     @Test
     @DisplayName("findAllItems method call return valid List<Item>")
     void findAllItem_ReturnValidResponseEntity(){
         //given
-        var items = List.of(
-                new Item(1, "Spring in Action", "Full guide for Spring newbie", "Uolls", new BigDecimal(15), "google.com/photos/1"),
-                new Item(2, "Spring fast", "Good guide for Spring newbie", "Uolls", new BigDecimal(150), "google.com/photos/2"),
-                new Item(3, "TestBook", null, null, new BigDecimal(25), null )
-        );
+        var items = getValidItemsList();
 
         doReturn(items).when(this.itemRepository).findAll();
 
@@ -51,7 +43,7 @@ class InteractionWithItemServiceTest {
     @DisplayName("findItemById method call with valid id return valid Item")
     void findItemById_WithValidId_ReturnValidItemEntity(){
         //given
-        var item = new Item(1, "Spring in Action", "Full guide for Spring newbie", "Uolls", new BigDecimal(15), "google.com/photos/1");
+        var item = getValidItem();
         Optional<Item> response = Optional.of(item);
         long id = 1;
 
@@ -84,7 +76,7 @@ class InteractionWithItemServiceTest {
     @DisplayName("deleteItem method call with valid id return valid deleted item")
     void deleteItem_WithValidId_ReturnValidDeletedItem(){
         //given
-        var item = new Item(1, "Spring in Action", "Full guide for Spring newbie", "Uolls", new BigDecimal(15), "google.com/photos/1");
+        var item = getValidItem();
         Optional<Item> itemOptional = Optional.of(item);
         long id = 1;
 
