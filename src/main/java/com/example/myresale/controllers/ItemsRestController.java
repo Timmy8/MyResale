@@ -1,9 +1,9 @@
 package com.example.myresale.controllers;
 
-import com.example.myresale.entities.DeleteItemRequestDTO;
+import com.example.myresale.entities.DTOs.DeleteItemRequestDTO;
 import com.example.myresale.entities.Item;
-import com.example.myresale.entities.CreateItemRequestDTO;
-import com.example.myresale.services.InteractionWithItemService;
+import com.example.myresale.entities.DTOs.CreateItemRequestDTO;
+import com.example.myresale.services.ItemService;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/items")
-public class ItemsController {
-    private InteractionWithItemService itemService;
+public class ItemsRestController {
+    private ItemService itemService;
 
-    public ItemsController(InteractionWithItemService itemService) {
+    public ItemsRestController(ItemService itemService) {
         this.itemService = itemService;
     }
 
@@ -55,7 +55,6 @@ public class ItemsController {
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body("Item: " + item + " deleted with reason\"" + dto.getReason() +"\"");
+                .body("Item: " + item + " deleted with reason: \"" + dto.getReason() +"\"");
     }
-
 }
