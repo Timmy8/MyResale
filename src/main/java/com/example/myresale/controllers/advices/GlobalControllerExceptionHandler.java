@@ -45,7 +45,7 @@ public class GlobalControllerExceptionHandler {
         return ResponseEntity
                 .badRequest()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(ex.getMessage());
+                .body(ex.getMessage() + "with cause: " + ex.getCause());
     }
 
 }

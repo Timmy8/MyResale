@@ -7,13 +7,13 @@ import java.util.List;
 
 public class TestData {
     private static List<Item> validItems = List.of(
-            new Item(1, "Spring in Action", "Full guide for Spring newbie", "Uolls", new BigDecimal(15), "google.com/photos/1"),
-            new Item(2, "Spring fast", "Good guide for Spring newbie", "Uolls", new BigDecimal(150), "google.com/photos/2"),
-            new Item(3, "TestBook", null, null, new BigDecimal(25), null )
+            new Item(1L, "Spring in Action", "Full guide for Spring newbie", "Uolls", new BigDecimal(15), "google.com/photos/1"),
+            new Item(2L, "Spring fast", "Good guide for Spring newbie", "Uolls", new BigDecimal(150), "google.com/photos/2"),
+            new Item(3L, "TestBook", null, null, new BigDecimal(25), null )
     );
 
     private static List<Item> invalidItems = List.of(
-            new Item(1, null, null, null, null, null)
+            new Item(1L, null, null, null, null, null)
     );
 
 

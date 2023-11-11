@@ -25,8 +25,6 @@ public class RegistrationController {
     @PostMapping
     public ResponseEntity<String> processRegistration(UserInfoDTO userInfoDTO){
         UserInfo userInfo = service.saveUserInfo(userInfoDTO);
-
-        System.out.println(userInfo.getAuthorities());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("Successfully create user '" + userInfo.getUsername() + "'");

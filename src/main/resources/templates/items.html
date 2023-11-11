@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All items</title>
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
+</head>
+<body>
+    <h1>Welcome to the items page!</h1>
+    <div class="items_list">
+        <div class="item" th:each="item:${items}">
+            <a th:href="@{/items/{id}(id=${item.id})}">
+                <img class="book_image" th:src="${item.imageURL}" alt="Book png">
+                <p><strong>Item name:</strong> "<span th:text="${item.name}">ITEM NAME</span>"</p>
+                <p><strong>Item description:</strong> "<span th:text="${item.description}">ITEM DESCRIPTION</span>"</p>
+                <p><strong>Item author:</strong> "<span th:text="${item.author}"> ITEM AUTHOR</span>"</p>
+                <p><strong>Item price:</strong> <span th:text="${item.price}"> ITEM PRICE</span></p>
+            </a>
+        </div>
+    </div>
+    <h2>That's all!</h2>
+</body>
+</html>

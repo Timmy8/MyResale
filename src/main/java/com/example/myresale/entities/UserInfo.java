@@ -20,7 +20,7 @@ import java.util.List;
 public class UserInfo implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String username;
     private String password;
@@ -32,9 +32,9 @@ public class UserInfo implements UserDetails {
     private String zip;
     private String phoneNumber;
 
-    @OneToOne
-    @JoinColumn(name = "cart_id")
-    UserCart userCart;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", nullable = false, unique = true)
+    private final UserCart userCart = new UserCart();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

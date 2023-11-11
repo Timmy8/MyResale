@@ -10,31 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/items")
-public class ItemsRestController {
+public class ItemsRESTController {
     private ItemService itemService;
 
-    public ItemsRestController(ItemService itemService) {
+    public ItemsRESTController(ItemService itemService) {
         this.itemService = itemService;
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Item>> findAllItems(){
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(itemService.findAllItems());
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<Item> findItemById(@PathVariable("id") String id){
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(itemService.findItemById(Integer.parseInt(id)));
     }
 
     @PostMapping
@@ -58,3 +41,4 @@ public class ItemsRestController {
                 .body("Item: " + item + " deleted with reason: \"" + dto.getReason() +"\"");
     }
 }
+

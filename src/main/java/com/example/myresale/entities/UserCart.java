@@ -1,8 +1,10 @@
 package com.example.myresale.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 public class UserCart {
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private long id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    UserInfo user;
+    @OneToOne(mappedBy = "userCart")
+    private UserInfo user;
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
@@ -26,7 +27,7 @@ public class UserCart {
             joinColumns = {@JoinColumn(name = "user_cart_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")}
     )
-    private List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
 
     public List<Item> getAllItemsFromCart(){return items;}
     public void addItemToCart(Item item){
