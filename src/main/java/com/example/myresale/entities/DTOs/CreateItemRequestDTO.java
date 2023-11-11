@@ -3,11 +3,13 @@ package com.example.myresale.entities.DTOs;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CreateItemRequestDTO {
     @NotNull(message = "Incorrect name: name can't be null!")
     @NotBlank(message = "Incorrect name: name can't be blank!")
