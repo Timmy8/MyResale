@@ -20,5 +20,9 @@
         <div><input type="submit" value="Registration"/></div>
     </form>
 </div>
+<div th:if="${param.error}">
+    <p> Incorrect data!</p>
+</div>
+</div>
 </body>
 </html>

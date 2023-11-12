@@ -1,8 +1,26 @@
+@import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
+
+body {
+    background-image: linear-gradient(rgba(255, 0, 0, 80%), rgba(255, 165, 0, 80%), rgba(255, 255, 0, 80%), rgba(0, 128, 0, 80%));
+
+
+}
 p {
     margin: 1%;
+    font-family: 'Didact Gothic', sans-serif;
+    /*color: #555555;*/
+    font-size: 16px;
+    line-height: 20px;
 }
 h1, h2 {
     text-align: center;
+    font-family: 'Comfortaa', cursive;
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    /*color: #333333;*/
 }
 a {
     color: inherit;
@@ -45,5 +63,23 @@ a {
 
 }
 
+.buttons_container {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%  ;
+}
 
+.submit_input {
+    background-color: cornsilk;
+    font-weight: bold;
+}
 
+.right_corner_buttons {
+    display: flex;
+    float: right;
+}
+
+.right_corner_button {
+    font-size: 18px;
+    background-color: cornsilk;
+    font-weight: bold;
+}
