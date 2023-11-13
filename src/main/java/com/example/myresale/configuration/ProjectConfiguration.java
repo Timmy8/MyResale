@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //CTRL + ALT + B -> посмотреть доступные реализации
@@ -39,14 +40,14 @@ public class ProjectConfiguration implements WebMvcConfigurer {
                  .authorizeHttpRequests(request -> {request
                          .requestMatchers("/login", "/registration", "/items", "/logout").permitAll()
                          .requestMatchers("/css/**", "/images/**").permitAll()
-                         .requestMatchers("/items/{id}").hasRole("USER")
+                         .requestMatchers("/items/{id}", "/creation").hasRole("USER")
+                         .requestMatchers(HttpMethod.POST, "/items").hasRole("USER")
                          .requestMatchers(HttpMethod.DELETE, "/items").hasRole("ADMIN");
                  })
                  .formLogin(form ->{form
                          .loginPage("/login")
                          .loginProcessingUrl("/login")
                          .defaultSuccessUrl("/items", true)
-                         .failureForwardUrl("/login?error=true")
                          .usernameParameter("username")
                          .passwordParameter("password")
                          .permitAll();
@@ -54,7 +55,7 @@ public class ProjectConfiguration implements WebMvcConfigurer {
                  })
                  .logout(logoutConfigurer -> logoutConfigurer
                          .logoutUrl("/logout")
-                         .logoutSuccessUrl("/login")
+                         .logoutSuccessUrl("/items")
                          .permitAll())
                  .authenticationProvider(authProvider());
 
@@ -76,5 +77,11 @@ public class ProjectConfiguration implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/static/images/");
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("items");
+        registry.addViewController("/creation").setViewName("creation");
     }
 }

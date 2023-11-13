@@ -3,6 +3,7 @@ package com.example.myresale.controllers;
 import com.example.myresale.entities.DTOs.UserInfoDTO;
 import com.example.myresale.entities.UserInfo;
 import com.example.myresale.services.UserInfoDetailsService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public ResponseEntity<String> processRegistration(UserInfoDTO userInfoDTO){
+    public ResponseEntity<String> processRegistration(@Valid UserInfoDTO userInfoDTO){
         UserInfo userInfo = service.saveUserInfo(userInfoDTO);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

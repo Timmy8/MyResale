@@ -21,7 +21,7 @@ public class ItemsRESTController {
     }
 
     @PostMapping
-    public ResponseEntity<Item> addItem(@RequestBody @Valid CreateItemRequestDTO item){
+    public ResponseEntity<Item> createItem(@Valid CreateItemRequestDTO item){
         String url = "http://localhost:8080/";
         Item createdItem = itemService.addItem(item);
         URI uri = URI.create(url + createdItem.getId());
