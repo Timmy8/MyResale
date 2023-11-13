@@ -8,7 +8,6 @@ body {
 p {
     margin: 1%;
     font-family: 'Didact Gothic', sans-serif;
-    /*color: #555555;*/
     font-size: 16px;
     line-height: 20px;
 }
@@ -20,7 +19,6 @@ h1, h2 {
     margin-bottom: 16px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    /*color: #333333;*/
 }
 a {
     color: inherit;
@@ -73,13 +71,37 @@ a {
     font-weight: bold;
 }
 
-.right_corner_buttons {
-    display: flex;
-    float: right;
+.corner_buttons {
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
-.right_corner_button {
-    font-size: 18px;
-    background-color: cornsilk;
+.right_corner_button input{
+    font-size: 15px;
+    background-color: rgba(255, 248, 220, 0.9);
     font-weight: bold;
+    float: right;
+    margin-right: 5px;
+}
+.left_corner_button input{
+    font-size: 15px;
+    background-color: rgba(255, 248, 220, 0.9);
+    font-weight: bold;
+    float: left;
+
+}
+
+.username {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 26px;
+    color: #111;
+    letter-spacing: 0px;
+    line-height: 1.4em;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.welcome_title {
+    width: 100%;
+    display: grid;
 }

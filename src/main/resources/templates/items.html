@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" >
 <head>
     <title>All items</title>
     <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
 </head>
 <body>
-    <h1>Welcome to the items page!</h1>
-    <div class="right_corner_buttons">
-        <form method="post" th:action="@{/error}"><input class="right_corner_button" type="submit" value="Registration!"/></form>
-        <form method="post" th:action="@{/error}"><input class="right_corner_button" type="submit" value="Login!"/></form>
+    <div>
+        <div class="welcome_title">
+            <h1 sec:authorize="isAnonymous()"> Hello, <span class="username">Anonymous</span>! Don't forget to log in!</h1>
+            <h1 sec:authorize="isFullyAuthenticated()"> Welcome back dear <span class="username" sec:authentication="name"> USERNAME </span>!</h1>
+        </div>
+
+        <div class="corner_buttons">
+            <div class="left_corner_button">
+                <form method="get" th:action="@{/creation}"><input type="submit" value="Add new item!"/></form>
+            </div>
+
+            <div class="right_corner_button">
+                <div sec:authorize="isAnonymous()">
+                    <form method="get" th:action="@{/registration}"><input type="submit" value="Registration"/></form>
+                    <form method="get" th:action="@{/login}"><input type="submit" value="Login"/></form>
+                </div>
+                <div sec:authorize="isFullyAuthenticated()">
+                    <form method="post" th:action="@{/logout}"><input type="submit" value="Logout"/></form>
+                    <form method="post" th:action="@{/error}"><input type="submit" value="Cart"/></form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="items_list">
         <div class="item" th:each="item:${items}">
             <a th:href="@{/items/{id}(id=${item.id})}">
-                <img class="book_image" th:src="${item.imageURL}" alt="Book png">
+                <img class="book_image" th:src="${item.imageURL}" alt="Book image!">
                 <p><strong>Item name:</strong> "<span th:text="${item.name}">ITEM NAME</span>"</p>
                 <p><strong>Item description:</strong> "<span th:text="${item.description}">ITEM DESCRIPTION</span>"</p>
                 <p><strong>Item author:</strong> "<span th:text="${item.author}"> ITEM AUTHOR</span>"</p>
@@ -26,6 +45,8 @@
             </a>
         </div>
     </div>
-    <h2>That's all!</h2>
+    <div>
+        <h2>That's all!</h2>
+    </div>
 </body>
 </html>

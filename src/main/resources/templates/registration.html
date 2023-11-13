@@ -12,8 +12,15 @@
     <label for="password">Password: </label>
     <input type="password" name="password"/><br/>
     <label for="email">Email: </label>
-    <input type="text" name="email"/><br/>
+    <input type="email" name="email"/><br/>
     <input type="submit" value="Register"/>
 </form>
+<div style="margin-top: 5px">
+    <p style="margin: 0" th:each="error: ${errors}">
+        <span th:text="${error}"> error </span>
+    </p>
+</div>
+
+</p>
 </body>
 </html>

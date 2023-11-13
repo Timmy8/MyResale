@@ -7,7 +7,7 @@
 <body>
     <h1>Item information:</h1>
     <div class="item_preview">
-        <img class="book_image" th:src="@{/{imageURL}(imageURL=${item.imageURL})}" alt="Book png">
+        <img class="book_image" th:src="@{/{imageURL}(imageURL=${item.imageURL})}" alt="Book image">
         <p><strong>Item name:</strong> "<span th:text="${item.name}">ITEM NAME</span>"</p>
         <p><strong>Item description:</strong> "<span th:text="${item.description}">ITEM DESCRIPTION</span>"</p>
         <p><strong>Item author:</strong> "<span th:text="${item.author}"> ITEM AUTHOR</span>"</p>
