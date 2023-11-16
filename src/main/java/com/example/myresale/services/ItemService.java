@@ -33,6 +33,7 @@ public class ItemService {
                 .author(itemDTO.getAuthor())
                 .price(itemDTO.getPrice())
                 .imageURL(itemDTO.getImageURL())
+                .createdBy(itemDTO.getCreatedBy())
                 .build();
 
         return repository.save(item);

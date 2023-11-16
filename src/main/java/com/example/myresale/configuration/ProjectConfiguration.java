@@ -21,8 +21,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //CTRL + ALT + B -> посмотреть доступные реализации
 
 @Configuration
-@EnableWebSecurity
-@EnableWebMvc
 public class ProjectConfiguration implements WebMvcConfigurer {
     @Autowired
     @Lazy
@@ -38,16 +36,16 @@ public class ProjectConfiguration implements WebMvcConfigurer {
          http
                  .csrf(csrf -> csrf.disable())
                  .authorizeHttpRequests(request -> {request
-                         .requestMatchers("/login", "/registration", "/items", "/logout").permitAll()
+                         .requestMatchers("/","/login", "/registration", "/items", "/logout").permitAll()
                          .requestMatchers("/css/**", "/images/**").permitAll()
-                         .requestMatchers("/items/{id}", "/creation").hasRole("USER")
-                         .requestMatchers(HttpMethod.POST, "/items").hasRole("USER")
-                         .requestMatchers(HttpMethod.DELETE, "/items").hasRole("ADMIN");
+                         .requestMatchers("/items/{id}", "/creation", "/deletion", "/cart/**").hasRole("USER")
+                         .requestMatchers(HttpMethod.POST, "/api/items/**").permitAll()
+                         .requestMatchers(HttpMethod.DELETE, "/api/items/**").permitAll();
                  })
                  .formLogin(form ->{form
                          .loginPage("/login")
                          .loginProcessingUrl("/login")
-                         .defaultSuccessUrl("/items", true)
+                         .defaultSuccessUrl("/items", false)
                          .usernameParameter("username")
                          .passwordParameter("password")
                          .permitAll();
@@ -81,7 +79,13 @@ public class ProjectConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("items");
+        registry.addRedirectViewController("/", "/items");
         registry.addViewController("/creation").setViewName("creation");
+        registry.addViewController("/deletion").setViewName("deletion");
+        registry.addViewController("/api/items/create").setViewName("creation");
+        registry.addViewController("/api/items/delete").setViewName("deletion");
     }
+
+
+
 }

@@ -33,8 +33,8 @@ public class UserCart {
     public void addItemToCart(Item item){
         items.add(item);
     }
-    public void deleteItemFromCart(int index){
-        items.remove(index);
+    public void deleteItemFromCart(Item item){
+        items.remove(item);
     }
     public void clearUserCart(){items.clear();}
 }

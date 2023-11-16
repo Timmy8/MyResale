@@ -24,4 +24,9 @@ public class Item {
     private String author;
     private BigDecimal price;
     private String imageURL;
+
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserInfo createdBy;
 }

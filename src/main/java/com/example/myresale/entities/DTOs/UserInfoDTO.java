@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserInfoDTO {
     @NotNull(message = "Incorrect username, can't be null!")
-    @NotBlank(message = "username can't be blank!")
+    @NotBlank(message = "Username can't be blank!")
     private String username;
 
     @NotNull(message = "Incorrect password, can't be null!")

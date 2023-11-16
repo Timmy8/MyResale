@@ -9,23 +9,24 @@
 <body>
     <div>
         <div class="welcome_title">
-            <h1 sec:authorize="isAnonymous()"> Hello, <span class="username">Anonymous</span>! Don't forget to log in!</h1>
-            <h1 sec:authorize="isFullyAuthenticated()"> Welcome back dear <span class="username" sec:authentication="name"> USERNAME </span>!</h1>
+            <h1 sec:authorize="isAnonymous()">          Hello,            <span class="username">Anonymous                           </span>! Don't forget to log in!</h1>
+            <h1 sec:authorize="isFullyAuthenticated()"> Welcome back dear <span class="username" sec:authentication="name"> USERNAME </span>!                        </h1>
         </div>
 
         <div class="corner_buttons">
             <div class="left_corner_button">
-                <form method="get" th:action="@{/creation}"><input type="submit" value="Add new item!"/></form>
+                <a href="/creation"> <input type="submit" value="Add new item!"/> </a>
+                <a href="/deletion"> <input type="submit" value="Delete item!"/>  </a>
             </div>
 
             <div class="right_corner_button">
                 <div sec:authorize="isAnonymous()">
-                    <form method="get" th:action="@{/registration}"><input type="submit" value="Registration"/></form>
-                    <form method="get" th:action="@{/login}"><input type="submit" value="Login"/></form>
+                    <a href="/registration"><input type="submit" value="Registration"/></a>
+                    <a href="/login"><input type="submit" value="Login"/></a>
                 </div>
                 <div sec:authorize="isFullyAuthenticated()">
-                    <form method="post" th:action="@{/logout}"><input type="submit" value="Logout"/></form>
-                    <form method="post" th:action="@{/error}"><input type="submit" value="Cart"/></form>
+                    <form method="get" th:action="@{/logout}"><input type="submit" value="Logout"/></form>
+                    <a href="/cart"><input type="submit" value="Cart"/></a>
                 </div>
             </div>
         </div>
@@ -34,12 +35,13 @@
         <div class="item" th:each="item:${items}">
             <a th:href="@{/items/{id}(id=${item.id})}">
                 <img class="book_image" th:src="${item.imageURL}" alt="Book image!">
-                <p><strong>Item name:</strong> "<span th:text="${item.name}">ITEM NAME</span>"</p>
+                <p><strong>Item name:       </strong> "<span th:text="${item.name}">              ITEM NAME</span>"</p>
                 <p><strong>Item description:</strong> "<span th:text="${item.description}">ITEM DESCRIPTION</span>"</p>
-                <p><strong>Item author:</strong> "<span th:text="${item.author}"> ITEM AUTHOR</span>"</p>
-                <p><strong>Item price:</strong> <span th:text="${item.price}"> ITEM PRICE</span></p>
+                <p><strong>Item author:     </strong> "<span th:text="${item.author}">          ITEM AUTHOR</span>"</p>
+                <p><strong>Item price:      </strong>  <span th:text="${item.price}">            ITEM PRICE</span> </p>
+                <p><strong>Creator:         </strong>  <span th:text="${item.createdBy.username}"> CREATOR </span> </p>
                 <div class="buttons_container">
-                    <form method="post" th:action="@{/error}"><input class="submit_input" type="submit" value="Add to cart!"/></form>
+                    <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"><input class="submit_input" type="submit" value="Add to cart!"/></form>
                     <form method="post" th:action="@{/error}"><input class="submit_input" type="submit" value="Buy now!"/></form>
                 </div>
             </a>

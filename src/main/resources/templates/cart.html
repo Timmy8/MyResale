@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>User cart</title>
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
+</head>
+<body>
+    <div class="welcome_title">
+        <h1>Your cart:</h1>
+    </div>
+    <div class="corner_buttons">
+        <div class="left_corner_button">
+            <a href="/items"> <input type="submit" value="Main page"/> </a>
+        </div>
+        <div class="right_corner_button">
+            <div>
+                <form method="get" th:action="@{/cart/clear}"><input type="submit" value="Clear cart"/></form>
+            </div>
+        </div>
+    <div class="cart_items_list">
+        <div class="cart_item">
+            <h3  style="width: 10%">Id</h3>
+            <h3  style="width: 10%">Image</h3>
+            <h3>Name</h3>
+            <h3>Description</h3>
+            <h3>Author</h3>
+            <h3>Price</h3>
+            <h3>Creator</h3>
+            <h3 style="width: 5%"></h3>
+        </div>
+        <div class="cart_item" th:each="item:${items}">
+            <h3 style="width: 10%" th:text="${item.id}">ITEM ID</h3>
+            <span  style="width: 10%"><img class="cart_image" th:src="${item.imageURL}" alt="Book image!" /></span>
+            <h3 th:text="${item.name}">               ITEM NAME</h3>
+            <h3 th:text="${item.description}"> ITEM DESCRIPTION</h3>
+            <h3 th:text="${item.author}">           ITEM AUTHOR</h3>
+            <h3 th:text="${item.price}">             ITEM PRICE</h3>
+            <h3 th:text="${item.createdBy.username}">   CREATOR</h3>
+            <a  th:href="@{cart/delete?id={id}(id=${item.id})}"  style="width: 5%"><img class="cart_trash_image" th:src="@{images/trash.png}" alt="Trash image!" /></a>
+        </div>
+    </div>
+</body>
+</html>
