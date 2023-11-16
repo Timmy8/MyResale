@@ -5,9 +5,9 @@
     <title>Create your item!</title>
 </head>
 <body>
-    <form method="post" th:action="@{/items}">
+    <form method="post" th:action="@{/api/items/create}" th:object="${createItemDTO}">
         <div><label for="name"> Item name: <input type="text" name="name"/> </label></div>
-        <div><label for="descirption"> Item description: <input type="text" name="description"/> </label></div>
+        <div><label for="description"> Item description: <input type="text" name="description"/> </label></div>
         <div><label for="author"> Item author: <input type="text" name="author"/> </label></div>
         <div><label for="price"> Item price: <input type="text" name="price"/> </label></div>
         <div><label for="imageURL"> Item image link: <input type="text" name="imageURL"/> </label></div>

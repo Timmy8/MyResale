@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -22,6 +23,7 @@ public class UserInfo implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String username;
     private String password;
     private String email;
@@ -35,6 +37,10 @@ public class UserInfo implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", nullable = false, unique = true)
     private final UserCart userCart = new UserCart();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "createdBy")
+    @ToString.Exclude
+    List<Item> items = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

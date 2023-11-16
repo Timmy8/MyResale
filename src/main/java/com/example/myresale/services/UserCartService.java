@@ -2,7 +2,8 @@ package com.example.myresale.services;
 
 import com.example.myresale.entities.Item;
 import com.example.myresale.entities.UserCart;
-import com.example.myresale.repositories.UserCartRepository;
+import com.example.myresale.repositories.ItemRepository;
+import com.example.myresale.repositories.UserInfoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,14 +11,16 @@ import java.util.List;
 
 @Service
 public class UserCartService {
-    private UserCartRepository repository;
+    private UserInfoRepository userInfoRepository;
+    private ItemRepository itemRepository;
 
-    public UserCartService(UserCartRepository repository) {
-        this.repository = repository;
+    public UserCartService(UserInfoRepository userInfoRepository, ItemRepository itemRepository) {
+        this.userInfoRepository = userInfoRepository;
+        this.itemRepository = itemRepository;
     }
 
     private UserCart findUserCartById(long id){
-        return repository.findById(id).orElseThrow();
+        return userInfoRepository.findById(id).orElseThrow().getUserCart();
     }
 
     public List<Item> getAllItemsFromUserCart(long userId){
@@ -25,13 +28,13 @@ public class UserCartService {
     }
 
     @Transactional
-    public void addItemToUserCart(long userId, Item item){
-        findUserCartById(userId).addItemToCart(item);
+    public void addItemToUserCart(long userId, long itemID){
+        findUserCartById(userId).addItemToCart(itemRepository.findById(itemID).orElseThrow());
     }
 
     @Transactional
-    public void deleteItemFromUserCart(long userId, int itemIndex){
-        findUserCartById(userId).deleteItemFromCart(itemIndex);
+    public void deleteItemFromUserCart(long userId, long itemId){
+        findUserCartById(userId).deleteItemFromCart(itemRepository.findById(itemId).orElseThrow());
     }
 
     @Transactional

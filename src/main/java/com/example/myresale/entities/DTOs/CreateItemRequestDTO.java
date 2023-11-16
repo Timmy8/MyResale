@@ -1,5 +1,6 @@
 package com.example.myresale.entities.DTOs;
 
+import com.example.myresale.entities.UserInfo;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,5 +29,7 @@ public class CreateItemRequestDTO {
     private BigDecimal price;
 
     private String imageURL;
+
+    private UserInfo createdBy;
 
 }

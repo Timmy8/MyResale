@@ -9,10 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -38,7 +36,9 @@ public class GlobalControllerExceptionHandler {
         logger.info(ex.getMessage());
         model.addAttribute("errors", errors);
 
-        return http.getHeader("referer");
+        System.out.println(http.getRequestURI());
+
+        return http.getRequestURI();
     }
 
     @ExceptionHandler(HttpMessageConversionException.class)

@@ -6,21 +6,25 @@
     <title>Registration page</title>
 </head>
 <body>
-<form method="POST" th:action="@{/registration}">
-    <label for="username">Username: </label>
-    <input type="text" name="username"/><br/>
-    <label for="password">Password: </label>
-    <input type="password" name="password"/><br/>
-    <label for="email">Email: </label>
-    <input type="email" name="email"/><br/>
-    <input type="submit" value="Register"/>
-</form>
-<div style="margin-top: 5px">
-    <p style="margin: 0" th:each="error: ${errors}">
-        <span th:text="${error}"> error </span>
-    </p>
-</div>
+    <form method="POST" th:action="@{/registration}">
+        <label for="username">Username: </label>
+        <input type="text" name="username"/><br/>
 
-</p>
+        <label for="password">Password: </label>
+        <input type="password" name="password"/><br/>
+
+        <label for="email">Email: </label>
+        <input type="email" name="email"/><br/>
+
+        <input type="submit" value="Register"/>
+    </form>
+    <a href="login">
+        <input type="submit" value="Login"/>
+    </a>
+    <div style="margin-top: 5px">
+        <p style="margin: 0" th:each="error: ${errors}">
+            <span th:text="${error}"> error </span>
+        </p>
+    </div>
 </body>
 </html>

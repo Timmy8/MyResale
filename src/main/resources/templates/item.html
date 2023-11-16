@@ -13,7 +13,7 @@
         <p><strong>Item author:</strong> "<span th:text="${item.author}"> ITEM AUTHOR</span>"</p>
         <p><strong>Item price:</strong> <span th:text="${item.price}"> ITEM PRICE</span></p>
         <div class="buttons_container">
-            <form method="post" th:action="@{/error}"><input class="submit_input" type="submit" value="Add to cart!"/></form>
+            <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"><input class="submit_input" type="submit" value="Add to cart!"/></form>
             <form method="post" th:action="@{/error}"><input class="submit_input" type="submit" value="Buy now!"/></form>
         </div>
     </div>
