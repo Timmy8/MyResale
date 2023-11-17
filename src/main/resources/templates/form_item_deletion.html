@@ -6,8 +6,9 @@
 </head>
 <body>
     <form method="post" th:action="@{/api/items/delete}" th:object="${deleteItemDTO}">
-        <div><label for="id"> Item id: <input type="text" name="id"/> </label></div>
-        <div><label for="reason"> Deletion reason: <input type="text" name="reason"/> </label></div>
+        <div><label for="id">     Item id:         <input type="text" name="id" th:value="${id}"/> </label></div>
+        <div><label for="reason"> Deletion reason: <input type="text" name="reason" value="Not valid"/> </label></div>
+
         <div><input type="submit" value="Delete!"/></div>
     </form>
     <div style="margin-top: 5px">

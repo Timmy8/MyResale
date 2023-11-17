@@ -17,6 +17,8 @@
                 <form method="get" th:action="@{/cart/clear}"><input type="submit" value="Clear cart"/></form>
             </div>
         </div>
+    </div>
+
     <div class="cart_items_list">
         <div class="cart_preview">
             <h3 style="width: 10%">Id         </h3>
@@ -40,8 +42,8 @@
                 <a  th:href="@{cart/delete?id={id}(id=${item.id})}">
                     <img class="cart_item_image" th:src="@{images/trash.png}" alt="Trash image!" title="Delete from cart!"/>
                 </a>
-                <a  th:href="@{/error}">
-                    <img class="cart_item_image" th:src="@{images/cart.png}" alt="Trash image!" title="Buy now!"/>
+                <a  th:href="@{/purchase/{id}(id=${item.id})}">
+                    <img class="cart_item_image" th:src="@{images/cart.png}"  alt="Cart image! " title="Buy now!"/>
                 </a>
             </div>
         </div>

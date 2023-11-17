@@ -23,21 +23,6 @@ public class GlobalRESTController {
         this.itemService = itemService;
     }
 
-    @PostMapping("/items/create")
-    public ResponseEntity<String> createItem(@ModelAttribute("createItemDTO") @Valid CreateItemRequestDTO item, Authentication user){
-        String url = "http://localhost:8080/items/";
-        UserInfo userInfo = (UserInfo)user.getPrincipal();
-        item.setCreatedBy(userInfo);
-
-        Item createdItem = itemService.addItem(item);
-        URI uri = URI.create(url + createdItem.getId());
-
-        return ResponseEntity
-                .created(uri)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body("Successfully create item: " + createdItem + "\nLink: " + uri);
-    }
-
     @PostMapping("/items/delete")
     public ResponseEntity<String> deleteItem(@ModelAttribute("deleteItemDTO") @Valid DeleteItemRequestDTO dto){
         Item item = itemService.deleteItem(dto.getId());
@@ -45,15 +30,6 @@ public class GlobalRESTController {
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("Item: " + item + " deleted with reason: \"" + dto.getReason() +"\"");
-    }
-
-    @PostMapping("/items/purchase")
-    public ResponseEntity<String> purchaseItem(@ModelAttribute("deliveryAddress")AddDeliveryAddressDTO dto){
-
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body("Thank you for your purchase");
     }
 }
 

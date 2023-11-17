@@ -92,12 +92,11 @@ input:focus{
 }
 
 .cart_image {
-    width: 56px;
-    height: 56px;
+    width: 58px;
+    height: 58px;
     border-style: solid;
     border-radius: 10px;
     border-width: 1px;
-    margin-top: 2px;
 }
 .cart_item_image{
     width: 30px;
@@ -118,6 +117,7 @@ input:focus{
 .book_image {
     display: block;
     width: 70%;
+    height: 60%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 15%;
@@ -129,7 +129,7 @@ input:focus{
 
 .buttons_container {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%  ;
+    grid-template-columns: 25% 50% 25%;
 }
 
 .corner_buttons {

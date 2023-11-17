@@ -5,7 +5,7 @@
     <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
 </head>
 <body>
-<form method="post" th:action="@{/api/items/purchase}" th:object="${deliveryAddress}">
+<form method="post" th:action="@{/purchase/{id}(id=${itemId})}" th:object="${deliveryAddress}">
     <div><label> Your full name: <input type="text" name="fullName"/> </label></div>
     <div><label> City:           <input type="text" name="city"/> </label></div>
     <div><label> Street:         <input type="text" name="street"/> </label></div>
@@ -20,6 +20,5 @@
         <span th:text="${error}"> error </span>
     </p>
 </div>
-
 </body>
 </html>

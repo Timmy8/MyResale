@@ -34,11 +34,11 @@ public class ProjectConfiguration implements WebMvcConfigurer {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> {
                     request
-                            .requestMatchers("/", "/login", "/registration", "/items", "/logout", "/purchase").permitAll()
+                            .requestMatchers("/", "/login", "/registration", "/logout", "/items/**", "/purchase/**").permitAll()
                             .requestMatchers("/css/**", "/images/**").permitAll()
-                            .requestMatchers("/items/{id}", "/creation", "/deletion", "/cart/**").hasRole("USER")
-                            .requestMatchers(HttpMethod.POST, "/api/items/**").permitAll()
-                            .requestMatchers(HttpMethod.DELETE, "/api/items/**").permitAll();
+                            .requestMatchers("/create", "/delete/**", "/cart/**").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST, "/create  /**").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST, "api/items/**").hasRole("USER");
                 })
                 .formLogin(form -> {
                     form
@@ -79,11 +79,10 @@ public class ProjectConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/", "/items");
-        registry.addViewController("/creation").setViewName("itemCreationForm.html");
-        registry.addViewController("/deletion").setViewName("itemDeletionForm.html");
-        registry.addViewController("/purchase").setViewName("itemPurchaseForm.html");
-        registry.addViewController("/api/items/create").setViewName("itemCreationForm.html");
-        registry.addViewController("/api/items/delete").setViewName("itemDeletionForm.html");
+        registry.addViewController("/delete").setViewName("form_item_deletion.html");
+        registry.addViewController("/create").setViewName("form_item_creation.html");
+        registry.addViewController("/api/items/create").setViewName("form_item_creation.html");
+        registry.addViewController("/api/items/delete").setViewName("form_item_deletion.html");
     }
 
 
