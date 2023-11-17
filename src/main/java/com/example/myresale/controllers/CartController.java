@@ -25,7 +25,7 @@ public class CartController {
         var user = (UserInfo)auth.getPrincipal();
         model.addAttribute("items", service.getAllItemsFromUserCart(authenticationToUserId(auth)));
 
-        return "cart.html";
+        return "userCartPage.html";
     }
 
     @PostMapping

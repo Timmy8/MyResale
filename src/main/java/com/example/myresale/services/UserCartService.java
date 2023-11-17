@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserCartService {
@@ -23,7 +24,7 @@ public class UserCartService {
         return userInfoRepository.findById(id).orElseThrow().getUserCart();
     }
 
-    public List<Item> getAllItemsFromUserCart(long userId){
+    public Set<Item> getAllItemsFromUserCart(long userId){
         return findUserCartById(userId).getAllItemsFromCart();
     }
 

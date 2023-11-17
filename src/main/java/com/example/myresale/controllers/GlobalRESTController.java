@@ -1,8 +1,9 @@
 package com.example.myresale.controllers;
 
-import com.example.myresale.entities.DTOs.DeleteItemRequestDTO;
+import com.example.myresale.DTOs.AddDeliveryAddressDTO;
+import com.example.myresale.DTOs.DeleteItemRequestDTO;
 import com.example.myresale.entities.Item;
-import com.example.myresale.entities.DTOs.CreateItemRequestDTO;
+import com.example.myresale.DTOs.CreateItemRequestDTO;
 import com.example.myresale.entities.UserInfo;
 import com.example.myresale.services.ItemService;
 import jakarta.validation.Valid;
@@ -44,6 +45,15 @@ public class GlobalRESTController {
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("Item: " + item + " deleted with reason: \"" + dto.getReason() +"\"");
+    }
+
+    @PostMapping("/items/purchase")
+    public ResponseEntity<String> purchaseItem(@ModelAttribute("deliveryAddress")AddDeliveryAddressDTO dto){
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body("Thank you for your purchase");
     }
 }
 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
     <title>Item page</title>
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
 </head>
 <body>
     <h1>Item information:</h1>
@@ -14,7 +14,7 @@
         <p><strong>Item price:</strong> <span th:text="${item.price}"> ITEM PRICE</span></p>
         <div class="buttons_container">
             <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"><input class="submit_input" type="submit" value="Add to cart!"/></form>
-            <form method="post" th:action="@{/error}"><input class="submit_input" type="submit" value="Buy now!"/></form>
+            <a th:href="@{/purchase?id={id}(id=${item.id})}"><input class="submit_input" type="submit" value="Buy now!"/></a>
         </div>
     </div>
 </body>

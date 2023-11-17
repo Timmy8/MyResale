@@ -1,4 +1,4 @@
-package com.example.myresale.entities.DTOs;
+package com.example.myresale.DTOs;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

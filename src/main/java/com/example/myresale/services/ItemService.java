@@ -1,7 +1,7 @@
 package com.example.myresale.services;
 
 import com.example.myresale.entities.Item;
-import com.example.myresale.entities.DTOs.CreateItemRequestDTO;
+import com.example.myresale.DTOs.CreateItemRequestDTO;
 import com.example.myresale.exceptions.ItemNotFoundException;
 import com.example.myresale.repositories.ItemRepository;
 import org.springframework.stereotype.Service;

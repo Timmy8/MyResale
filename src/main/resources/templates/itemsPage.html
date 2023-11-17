@@ -42,7 +42,7 @@
                 <p><strong>Creator:         </strong>  <span th:text="${item.createdBy.username}"> CREATOR </span> </p>
                 <div class="buttons_container">
                     <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"><input class="submit_input" type="submit" value="Add to cart!"/></form>
-                    <form method="post" th:action="@{/error}"><input class="submit_input" type="submit" value="Buy now!"/></form>
+                    <a href="/purchase"><input class="submit_input" type="submit" value="Buy now!"/></a>
                 </div>
             </a>
         </div>

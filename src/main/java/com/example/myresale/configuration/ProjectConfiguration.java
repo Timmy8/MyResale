@@ -1,19 +1,16 @@
 package com.example.myresale.configuration;
 
 import com.example.myresale.services.UserInfoDetailsService;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -27,41 +24,43 @@ public class ProjectConfiguration implements WebMvcConfigurer {
     UserInfoDetailsService service;
 
     @Bean
-    public PasswordEncoder encoder(){
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-         http
-                 .csrf(csrf -> csrf.disable())
-                 .authorizeHttpRequests(request -> {request
-                         .requestMatchers("/","/login", "/registration", "/items", "/logout").permitAll()
-                         .requestMatchers("/css/**", "/images/**").permitAll()
-                         .requestMatchers("/items/{id}", "/creation", "/deletion", "/cart/**").hasRole("USER")
-                         .requestMatchers(HttpMethod.POST, "/api/items/**").permitAll()
-                         .requestMatchers(HttpMethod.DELETE, "/api/items/**").permitAll();
-                 })
-                 .formLogin(form ->{form
-                         .loginPage("/login")
-                         .loginProcessingUrl("/login")
-                         .defaultSuccessUrl("/items", false)
-                         .usernameParameter("username")
-                         .passwordParameter("password")
-                         .permitAll();
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(request -> {
+                    request
+                            .requestMatchers("/", "/login", "/registration", "/items", "/logout", "/purchase").permitAll()
+                            .requestMatchers("/css/**", "/images/**").permitAll()
+                            .requestMatchers("/items/{id}", "/creation", "/deletion", "/cart/**").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST, "/api/items/**").permitAll()
+                            .requestMatchers(HttpMethod.DELETE, "/api/items/**").permitAll();
+                })
+                .formLogin(form -> {
+                    form
+                            .loginPage("/login")
+                            .loginProcessingUrl("/login")
+                            .defaultSuccessUrl("/items", false)
+                            .usernameParameter("username")
+                            .passwordParameter("password")
+                            .permitAll();
 
-                 })
-                 .logout(logoutConfigurer -> logoutConfigurer
-                         .logoutUrl("/logout")
-                         .logoutSuccessUrl("/items")
-                         .permitAll())
-                 .authenticationProvider(authProvider());
+                })
+                .logout(logoutConfigurer -> logoutConfigurer
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/items")
+                        .permitAll())
+                .authenticationProvider(authProvider());
 
         return http.build();
     }
 
     @Bean
-    public DaoAuthenticationProvider authProvider(){
+    public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(service);
         authenticationProvider.setPasswordEncoder(encoder());
@@ -80,12 +79,12 @@ public class ProjectConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/", "/items");
-        registry.addViewController("/creation").setViewName("creation");
-        registry.addViewController("/deletion").setViewName("deletion");
-        registry.addViewController("/api/items/create").setViewName("creation");
-        registry.addViewController("/api/items/delete").setViewName("deletion");
+        registry.addViewController("/creation").setViewName("itemCreationForm.html");
+        registry.addViewController("/deletion").setViewName("itemDeletionForm.html");
+        registry.addViewController("/purchase").setViewName("itemPurchaseForm.html");
+        registry.addViewController("/api/items/create").setViewName("itemCreationForm.html");
+        registry.addViewController("/api/items/delete").setViewName("itemDeletionForm.html");
     }
-
 
 
 }

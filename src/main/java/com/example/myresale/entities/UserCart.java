@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -27,9 +29,9 @@ public class UserCart {
             joinColumns = {@JoinColumn(name = "user_cart_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")}
     )
-    private final List<Item> items = new ArrayList<>();
+    private final Set<Item> items = new HashSet<>();
 
-    public List<Item> getAllItemsFromCart(){return items;}
+    public Set<Item> getAllItemsFromCart(){return items;}
     public void addItemToCart(Item item){
         items.add(item);
     }
