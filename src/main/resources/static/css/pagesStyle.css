@@ -1,10 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
-
+html{
+    height: 100%;
+    width: 100%;
+}
 body {
     background-image: linear-gradient(rgba(255, 0, 0, 80%), rgba(255, 165, 0, 80%), rgba(255, 255, 0, 80%), rgba(0, 128, 0, 80%));
     width: 100%;
     height: 100%;
-
+    background-attachment: fixed;
 }
 p {
     margin: 1%;
@@ -61,6 +64,19 @@ input:focus{
 }
 .cart_item {
     display: flex;
+    background-color: rgb(250, 250, 250, 15%);
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 1px;
+}
+
+.cart_preview{
+    display: flex;
+    background-color: rgb(250, 250, 250, 90%);
+    text-align: center;
     width: 100%;
     height: 60px;
     margin-top: 10px;
@@ -69,7 +85,6 @@ input:focus{
     border-width: 2px;
 }
 .cart_item h3, span{
-    width: 20%;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -77,16 +92,17 @@ input:focus{
 }
 
 .cart_image {
-    width: 55px;
-    height: 55px;
+    width: 58px;
+    height: 58px;
     border-style: solid;
     border-radius: 10px;
-    border-width: 2px;
+    border-width: 1px;
 }
-.cart_trash_image{
+.cart_item_image{
     width: 30px;
     height: 30px;
     margin-top: 15px;
+    margin-right: 20%;
 }
 
 .item_preview {
@@ -101,6 +117,7 @@ input:focus{
 .book_image {
     display: block;
     width: 70%;
+    height: 60%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 15%;
@@ -112,7 +129,7 @@ input:focus{
 
 .buttons_container {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%  ;
+    grid-template-columns: 25% 50% 25%;
 }
 
 .corner_buttons {

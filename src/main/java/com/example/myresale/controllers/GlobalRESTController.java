@@ -1,8 +1,9 @@
 package com.example.myresale.controllers;
 
-import com.example.myresale.entities.DTOs.DeleteItemRequestDTO;
+import com.example.myresale.DTOs.AddDeliveryAddressDTO;
+import com.example.myresale.DTOs.DeleteItemRequestDTO;
 import com.example.myresale.entities.Item;
-import com.example.myresale.entities.DTOs.CreateItemRequestDTO;
+import com.example.myresale.DTOs.CreateItemRequestDTO;
 import com.example.myresale.entities.UserInfo;
 import com.example.myresale.services.ItemService;
 import jakarta.validation.Valid;
@@ -20,21 +21,6 @@ public class GlobalRESTController {
 
     public GlobalRESTController(ItemService itemService) {
         this.itemService = itemService;
-    }
-
-    @PostMapping("/items/create")
-    public ResponseEntity<String> createItem(@ModelAttribute("createItemDTO") @Valid CreateItemRequestDTO item, Authentication user){
-        String url = "http://localhost:8080/items/";
-        UserInfo userInfo = (UserInfo)user.getPrincipal();
-        item.setCreatedBy(userInfo);
-
-        Item createdItem = itemService.addItem(item);
-        URI uri = URI.create(url + createdItem.getId());
-
-        return ResponseEntity
-                .created(uri)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body("Successfully create item: " + createdItem + "\nLink: " + uri);
     }
 
     @PostMapping("/items/delete")

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Item purchase form</title>
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
+</head>
+<body>
+<form method="post" th:action="@{/purchase/{id}(id=${itemId})}" th:object="${deliveryAddress}">
+    <div><label> Your full name: <input type="text" name="fullName"/> </label></div>
+    <div><label> City:           <input type="text" name="city"/> </label></div>
+    <div><label> Street:         <input type="text" name="street"/> </label></div>
+    <div><label> House number:   <input type="text" name="houseNumber"/> </label></div>
+    <div><label> ZIP code:       <input type="text" name="zip"/> </label></div>
+    <div><label> Phone number:   <input type="text" name="phoneNumber"/> </label></div>
+
+    <div><input type="submit" value="Submit!"/></div>
+</form>
+<div style="margin-top: 5px">
+    <p style="margin: 0" th:each="error: ${errors}">
+        <span th:text="${error}"> error </span>
+    </p>
+</div>
+</body>
+</html>

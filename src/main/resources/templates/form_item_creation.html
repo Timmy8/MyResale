@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create your item!</title>
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
+</head>
+<body>
+    <form method="post" th:action="@{/create}" th:object="${createItemDTO}">
+        <div><label for="name">        Item name:        <input type="text" name="name"/>        </label></div>
+        <div><label for="description"> Item description: <input type="text" name="description"/> </label></div>
+        <div><label for="author">      Item author:      <input type="text" name="author"/>      </label></div>
+        <div><label for="price">       Item price:       <input type="text" name="price"/>       </label></div>
+        <div><label for="imageURL">    Item image link:  <input type="text" name="imageURL"/>    </label></div>
+
+        <div><input type="submit" value="Create!"/></div>
+    </form>
+
+    <div style="margin-top: 5px">
+        <p style="margin: 0" th:each="error: ${errors}">
+            <span th:text="${error}"> error </span>
+        </p>
+    </div>
+</body>
+</html>

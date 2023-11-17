@@ -15,8 +15,8 @@
 
         <div class="corner_buttons">
             <div class="left_corner_button">
-                <a href="/creation"> <input type="submit" value="Add new item!"/> </a>
-                <a href="/deletion"> <input type="submit" value="Delete item!"/>  </a>
+                <a href="/create"> <input type="submit" value="Add new item!"/> </a>
+                <a href="/delete"> <input type="submit" value="Delete item! "/> </a>
             </div>
 
             <div class="right_corner_button">
@@ -40,15 +40,16 @@
                 <p><strong>Item author:     </strong> "<span th:text="${item.author}">          ITEM AUTHOR</span>"</p>
                 <p><strong>Item price:      </strong>  <span th:text="${item.price}">            ITEM PRICE</span> </p>
                 <p><strong>Creator:         </strong>  <span th:text="${item.createdBy.username}"> CREATOR </span> </p>
+
                 <div class="buttons_container">
                     <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"><input class="submit_input" type="submit" value="Add to cart!"/></form>
-                    <form method="post" th:action="@{/error}"><input class="submit_input" type="submit" value="Buy now!"/></form>
+                    <a th:href="@{/purchase/{id}(id=${item.id})}"><input class="submit_input" type="submit" value="Buy now!"/></a>
                 </div>
             </a>
         </div>
     </div>
     <div>
-        <h2>That's all!</h2>
+        <h2> That's all! </h2>
     </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.example.myresale.entities.DTOs;
+package com.example.myresale.DTOs;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -8,11 +8,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserInfoDTO {
     @NotNull(message = "Incorrect username, can't be null!")
+    @Size(min = 5, max = 20, message = "Username must be 5-20 symbols!")
     @NotBlank(message = "Username can't be blank!")
     private String username;
 
     @NotNull(message = "Incorrect password, can't be null!")
-    @Size(min = 5, max = 20, message = "Password must be 5-15 symbols!")
+    @Size(min = 5, max = 20, message = "Password must be 5-20 symbols!")
     @Pattern(regexp = "^.*[A-Z]+.*$", message = "Password must have min 1 uppercase letter!")
     private String password;
 

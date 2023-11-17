@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Item page</title>
+    <link rel="stylesheet"  type="text/css" th:href="@{/css/pagesStyle.css}" />
+</head>
+<body>
+    <h1>Item information:</h1>
+    <div class="corner_buttons">
+        <div class="left_corner_button">
+            <a href="/items"> <input type="submit" value="Main page"/> </a>
+        </div>
+    </div>
+    <div class="item_preview">
+        <img class="book_image" th:src="@{/{imageURL}(imageURL=${item.imageURL})}" alt="Book image">
+        <p><strong>Item name:       </strong> "<span th:text="${item.name}">              ITEM NAME</span>"</p>
+        <p><strong>Item description:</strong> "<span th:text="${item.description}">ITEM DESCRIPTION</span>"</p>
+        <p><strong>Item author:     </strong> "<span th:text="${item.author}">          ITEM AUTHOR</span>"</p>
+        <p><strong>Item price:      </strong>  <span th:text="${item.price}">            ITEM PRICE</span> </p>
+        <p><strong>Creator:         </strong>  <span th:text="${item.createdBy.username}"> CREATOR </span> </p>
+
+        <div class="buttons_container">
+            <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"> <input class="submit_input" type="submit" value="Add to cart!"/></form>
+            <a th:href="@{/purchase/{id}(id=${item.id})}">                   <input class="submit_input" type="submit" value="Buy now!"/></a>
+            <a th:href="@{/delete/{id}(id=${item.id})}">             <input type="submit" value="Delete item!"/></a>
+       </div>
+    </div>
+</body>
+</html>

@@ -6,10 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -27,12 +24,6 @@ public class UserInfo implements UserDetails {
     private String username;
     private String password;
     private String email;
-    private String fullName;
-    private String city;
-    private String street;
-    private String houseNumber;
-    private String zip;
-    private String phoneNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", nullable = false, unique = true)
@@ -41,6 +32,10 @@ public class UserInfo implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "createdBy")
     @ToString.Exclude
     List<Item> items = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "createdBy")
+    @ToString.Exclude
+    List<DeliveryAddress> deliveryAddresses = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

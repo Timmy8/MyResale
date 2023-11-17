@@ -1,4 +1,4 @@
-package com.example.myresale.entities.DTOs;
+package com.example.myresale.DTOs;
 
 import com.example.myresale.entities.UserInfo;
 import jakarta.validation.constraints.*;
