@@ -1,6 +1,6 @@
 package com.example.myresale.services;
 
-import com.example.myresale.DTOs.UserInfoDTO;
+import com.example.myresale.DTOs.UserInfoCreateDTO;
 import com.example.myresale.entities.UserInfo;
 import com.example.myresale.repositories.UserInfoRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +27,7 @@ public class UserInfoDetailsService implements UserDetailsService {
         else throw new UsernameNotFoundException("User '" + username + "' not found!");
     }
 
-    public UserInfo saveUserInfo(UserInfoDTO userInfoDTO){
+    public UserInfo saveUserInfo(UserInfoCreateDTO userInfoDTO){
 
         UserInfo userInfo = UserInfo.builder()
                 .username(userInfoDTO.getUsername())

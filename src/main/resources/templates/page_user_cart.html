@@ -36,15 +36,21 @@
             <h3   style="width: 15%"   th:text="${item.name}">               ITEM NAME</h3>
             <h3   style="width: 30%"   th:text="${item.description}"> ITEM DESCRIPTION</h3>
             <h3   style="width: 15%"   th:text="${item.author}">           ITEM AUTHOR</h3>
-            <h3   style="width: 15%"  th:text="${item.price}">             ITEM PRICE</h3>
-            <h3   style="width: 15%" th:text="${item.createdBy.username}">   CREATOR</h3>
-            <div   style="width: 10%">
-                <a  th:href="@{cart/delete?id={id}(id=${item.id})}">
-                    <img class="cart_item_image" th:src="@{images/trash.png}" alt="Trash image!" title="Delete from cart!"/>
-                </a>
-                <a  th:href="@{/purchase/{id}(id=${item.id})}">
-                    <img class="cart_item_image" th:src="@{images/cart.png}"  alt="Cart image! " title="Buy now!"/>
-                </a>
+            <h3   style="width: 15%"   th:text="${item.price}">             ITEM PRICE</h3>
+            <h3   style="width: 15%"   th:text="${item.createdBy.username}">   CREATOR</h3>
+            <div  style="width: 10%">
+
+                <div th:if="${item.available}" >
+                    <a  th:href="@{cart/delete?id={id}(id=${item.id})}">
+                        <img class="cart_item_image" th:src="@{images/trash.png}" alt="Trash image!" title="Delete from cart!"/>
+                    </a>
+                    <a  th:href="@{/purchase/{id}(id=${item.id})}">
+                        <img class="cart_item_image" th:src="@{images/cart.png}"  alt="Cart image! " title="Buy now!"/>
+                    </a>
+                </div>
+                <div th:unless="${item.available}" class="unavailable_item">
+                    <strong>Item unavailable!</strong>
+                </div>
             </div>
         </div>
     </div>

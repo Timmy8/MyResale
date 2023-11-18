@@ -19,11 +19,14 @@
         <p><strong>Item price:      </strong>  <span th:text="${item.price}">            ITEM PRICE</span> </p>
         <p><strong>Creator:         </strong>  <span th:text="${item.createdBy.username}"> CREATOR </span> </p>
 
-        <div class="buttons_container">
+        <div th:if="${item.available}" class="buttons_container">
             <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"> <input class="submit_input" type="submit" value="Add to cart!"/></form>
             <a th:href="@{/purchase/{id}(id=${item.id})}">                   <input class="submit_input" type="submit" value="Buy now!"/></a>
-            <a th:href="@{/delete/{id}(id=${item.id})}">             <input type="submit" value="Delete item!"/></a>
+            <a th:href="@{/delete/{id}(id=${item.id})}">                     <input type ="submit" value="Delete item!"/></a>
        </div>
+        <div th:unless="${item.available}" class="unavailable_item">
+            <strong>Item unavailable!</strong>
+        </div>
     </div>
 </body>
 </html>

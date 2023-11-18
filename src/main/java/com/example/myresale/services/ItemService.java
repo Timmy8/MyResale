@@ -1,7 +1,7 @@
 package com.example.myresale.services;
 
 import com.example.myresale.entities.Item;
-import com.example.myresale.DTOs.CreateItemRequestDTO;
+import com.example.myresale.DTOs.ItemCreateRequestDTO;
 import com.example.myresale.exceptions.ItemNotFoundException;
 import com.example.myresale.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,10 @@ import java.util.List;
 public class ItemService {
     private final ItemRepository repository;
 
+    public Item findItemById(long id){
+        return repository.findById(id).orElseThrow(()-> new ItemNotFoundException(id));
+    }
+
     public ItemService(ItemRepository repository) {
         this.repository = repository;
     }
@@ -21,12 +25,12 @@ public class ItemService {
         return repository.findAll();
     }
 
-    public Item findItemById(long id){
-        return repository.findById(id).orElseThrow(()-> new ItemNotFoundException(id));
+    public boolean isAvailable(long id){
+        return findItemById(id).isAvailable();
     }
 
     @Transactional
-    public Item addItem(CreateItemRequestDTO itemDTO){
+    public Item addItem(ItemCreateRequestDTO itemDTO){
         Item item = Item.builder()
                 .name(itemDTO.getName())
                 .description(itemDTO.getDescription())
@@ -34,6 +38,7 @@ public class ItemService {
                 .price(itemDTO.getPrice())
                 .imageURL(itemDTO.getImageURL())
                 .createdBy(itemDTO.getCreatedBy())
+                .available(true)
                 .build();
 
         return repository.save(item);
@@ -45,5 +50,10 @@ public class ItemService {
         repository.deleteItemById(id);
 
         return item;
+    }
+
+    @Transactional
+    public void setItemAvailable(boolean available, Long id){
+        findItemById(id).setAvailable(available);
     }
 }

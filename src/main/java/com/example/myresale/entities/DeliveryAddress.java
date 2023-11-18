@@ -14,6 +14,7 @@ public class DeliveryAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String fullName;
     private String city;
     private String street;
