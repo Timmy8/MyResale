@@ -1,8 +1,5 @@
 package com.example.myresale.DTOs;
 
-import com.example.myresale.entities.UserInfo;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -10,12 +7,11 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddDeliveryAddressDTO {
+public class DeliveryAddressCreateDTO {
     @NotNull(message = "Incorrect full name, can't be null!")
     @Size(min = 5, max = 20, message = "Full name must be 5-20 symbols!")
     @NotBlank(message = "Full name can't be blank!")

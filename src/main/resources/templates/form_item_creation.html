@@ -15,10 +15,10 @@
         <div><input type="submit" value="Create!"/></div>
     </form>
 
-    <div style="margin-top: 5px">
-        <p style="margin: 0" th:each="error: ${errors}">
+    <div class="errors_container">
+        <div th:each="error: ${errors}" class="error_msg">
             <span th:text="${error}"> error </span>
-        </p>
+        </div>
     </div>
 </body>
 </html>

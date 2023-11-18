@@ -7,18 +7,19 @@
 </head>
 <body>
 <div class="login-page">
-    <div style="margin-bottom: 5px">
-        <p style="margin: 0" th:each="error: ${errors}">
-            <span th:text="${error}"> error </span>
-        </p>
-    </div>
     <div class="form">
-        <form class="register-form" method="POST" th:action="@{/registration}">
+        <form class="register-form" method="POST" th:action="@{/registration}" th:object="${UserInfoDTO}">
             <input type="text"        name="username" placeholder="username"/>
             <input type="password"    name="password" placeholder="password"/>
             <input type="text"        name="email"    placeholder="email"/>
 
             <input id="submit_button" type="submit"   value="Register"/>
+
+            <div class="errors_container">
+                <div th:each="error: ${errors}" class="error_msg">
+                    <span th:text="${error}"> error </span>
+                </div>
+            </div>
 
             <p class="message">Already registered? <a href="/login">Log in</a></p>
         </form>

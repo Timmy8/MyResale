@@ -15,18 +15,18 @@
 
         <div class="corner_buttons">
             <div class="left_corner_button">
-                <a href="/create"> <input type="submit" value="Add new item!"/> </a>
-                <a href="/delete"> <input type="submit" value="Delete item! "/> </a>
+                <a th:href="@{/create}"> <input type="submit" value="Add new item!"/> </a>
+                <a th:href="@{/delete}"> <input type="submit" value="Delete item! "/> </a>
             </div>
 
             <div class="right_corner_button">
                 <div sec:authorize="isAnonymous()">
-                    <a href="/registration"><input type="submit" value="Registration"/></a>
-                    <a href="/login"><input type="submit" value="Login"/></a>
+                    <a th:href="@{/registration}"><input type="submit" value="Registration"/></a>
+                    <a th:href="@{/login}"><input type="submit" value="Login"/></a>
                 </div>
                 <div sec:authorize="isFullyAuthenticated()">
                     <form method="get" th:action="@{/logout}"><input type="submit" value="Logout"/></form>
-                    <a href="/cart"><input type="submit" value="Cart"/></a>
+                    <a th:href="@{/cart}"><input type="submit" value="Cart"/></a>
                 </div>
             </div>
         </div>
@@ -41,9 +41,12 @@
                 <p><strong>Item price:      </strong>  <span th:text="${item.price}">            ITEM PRICE</span> </p>
                 <p><strong>Creator:         </strong>  <span th:text="${item.createdBy.username}"> CREATOR </span> </p>
 
-                <div class="buttons_container">
+                <div th:if="${item.available}" class="buttons_container">
                     <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"><input class="submit_input" type="submit" value="Add to cart!"/></form>
                     <a th:href="@{/purchase/{id}(id=${item.id})}"><input class="submit_input" type="submit" value="Buy now!"/></a>
+                </div>
+                <div th:unless="${item.available}" class="unavailable_item">
+                    <strong>Item unavailable!</strong>
                 </div>
             </a>
         </div>

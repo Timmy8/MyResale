@@ -6,10 +6,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserInfoDTO {
+public class UserInfoCreateDTO {
     @NotNull(message = "Incorrect username, can't be null!")
     @Size(min = 5, max = 20, message = "Username must be 5-20 symbols!")
-    @NotBlank(message = "Username can't be blank!")
     private String username;
 
     @NotNull(message = "Incorrect password, can't be null!")

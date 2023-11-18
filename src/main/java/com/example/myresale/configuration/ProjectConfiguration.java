@@ -37,7 +37,7 @@ public class ProjectConfiguration implements WebMvcConfigurer {
                             .requestMatchers("/", "/login", "/registration", "/logout", "/items/**", "/purchase/**").permitAll()
                             .requestMatchers("/css/**", "/images/**").permitAll()
                             .requestMatchers("/create", "/delete/**", "/cart/**").hasRole("USER")
-                            .requestMatchers(HttpMethod.POST, "/create  /**").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST, "/create/**").hasRole("USER")
                             .requestMatchers(HttpMethod.POST, "api/items/**").hasRole("USER");
                 })
                 .formLogin(form -> {
@@ -79,9 +79,6 @@ public class ProjectConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/", "/items");
-        registry.addViewController("/delete").setViewName("form_item_deletion.html");
-        registry.addViewController("/create").setViewName("form_item_creation.html");
-        registry.addViewController("/api/items/create").setViewName("form_item_creation.html");
         registry.addViewController("/api/items/delete").setViewName("form_item_deletion.html");
     }
 

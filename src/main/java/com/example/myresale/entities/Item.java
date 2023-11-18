@@ -2,7 +2,7 @@ package com.example.myresale.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,6 +24,10 @@ public class Item {
     private String author;
     private BigDecimal price;
     private String imageURL;
+    private boolean available;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private final Date createdAt = new Date();
 
     @ToString.Exclude
     @ManyToOne

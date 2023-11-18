@@ -166,3 +166,9 @@ input:focus{
     width: 100%;
     display: grid;
 }
+
+.unavailable_item{
+    margin-top: 15px;
+    color: #891B04;
+    font-size: 20px;
+}
