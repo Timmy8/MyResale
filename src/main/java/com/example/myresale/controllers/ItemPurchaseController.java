@@ -42,7 +42,15 @@ public class ItemPurchaseController {
         return "form_item_purchase.html";
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/allCartPurchase")
+    public String purchaseAllFromUserCart(Authentication authentication, Model model){
+
+        model.addAttribute("itemId", "allCart");
+
+        return "form_item_purchase.html";
+    }
+
+    @PostMapping("/{id}\\d+")
     public ResponseEntity<String> purchaseItem(@PathVariable("id") Long itemId,
                                                @ModelAttribute("deliveryAddress") DeliveryAddressCreateDTO dto,
                                                Authentication authentication){
@@ -50,7 +58,7 @@ public class ItemPurchaseController {
         if (itemService.isAvailable(itemId)) {
             UserInfo user = null;
             if (authentication != null) {
-                user = (UserInfo) authentication.getPrincipal();
+                user = (UserInfo)authentication.getPrincipal();
             }
 
             Long orderId = purchaseOrderService.saveOrder(itemId, dto, user);

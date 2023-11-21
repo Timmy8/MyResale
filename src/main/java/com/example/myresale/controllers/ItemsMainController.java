@@ -20,6 +20,7 @@ public class ItemsMainController {
         return "page_items_main.html";
     }
 
+
     @GetMapping("/{id:\\d+}")
     public String findItemById(@PathVariable("id") Long id, Model model){
         model.addAttribute("item", itemService.findItemById(id));

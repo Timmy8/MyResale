@@ -23,7 +23,9 @@ public class PurchaseOrderService {
         this.deliveryAddressService = deliveryAddressService;
     }
 
-
+    public List<PurchaseOrder> findAllOrdersByUserId(Long userInfoId){
+        return repository.findAllPurchaseOrderByUserInfoId(userInfoId);
+    }
     @Transactional
     public Long saveOrder(Long itemId, DeliveryAddressCreateDTO dto, UserInfo user){
         Item item = itemService.findItemById(itemId);

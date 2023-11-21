@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>User purchases!</title>
+</head>
+<body>
+    <h1> USER PURCHASES!</h1>
+<div th:each="purchase:${purchases}">
+    <h1 th:text="${purchase.item.name}"> PURCHASE ITEM</h1>
+</div>
+</body>
+</html>
