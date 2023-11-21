@@ -29,7 +29,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String processRegistration( @ModelAttribute("UserInfoDTO") UserInfoCreateDTO userInfoDTO, Errors errors, Model model){
+    public String processRegistration( @ModelAttribute("UserInfoDTO") @Valid UserInfoCreateDTO userInfoDTO, Errors errors, Model model){
         if (errors.hasErrors()) {
             List<String> errorsList = new ArrayList<>();
 

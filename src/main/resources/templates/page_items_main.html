@@ -40,6 +40,7 @@
                 <p><strong>Item author:     </strong> "<span th:text="${item.author}">          ITEM AUTHOR</span>"</p>
                 <p><strong>Item price:      </strong>  <span th:text="${item.price}">            ITEM PRICE</span> </p>
                 <p><strong>Creator:         </strong>  <span th:text="${item.createdBy.username}"> CREATOR </span> </p>
+                <p><strong>Creation date:   </strong>  <span th:text="${#dates.format(item.createdAt, 'dd.MM / HH:mm')}">   CREATION DATE </span> </p>
 
                 <div th:if="${item.available}" class="buttons_container">
                     <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"><input class="submit_input" type="submit" value="Add to cart!"/></form>

@@ -21,14 +21,18 @@
 
     <div class="cart_items_list">
         <div class="cart_preview">
-            <h3 style="width: 10%">Id         </h3>
-            <h3 style="width: 15%">Image      </h3>
-            <h3 style="width: 15%">Name       </h3>
-            <h3 style="width: 30%">Description</h3>
-            <h3 style="width: 15%">Author     </h3>
-            <h3 style="width: 15%">Price      </h3>
-            <h3 style="width: 15%">Creator    </h3>
-            <h3 style="width: 10%">           </h3>
+            <h3  style="width: 10%">Id         </h3>
+            <h3  style="width: 15%">Image      </h3>
+            <h3  style="width: 15%">Name       </h3>
+            <h3  style="width: 30%">Description</h3>
+            <h3  style="width: 15%">Author     </h3>
+            <h3  style="width: 15%">Price      </h3>
+            <h3  style="width: 15%">Creator    </h3>
+            <div style="width: 10%">
+                <a th:href="@{/purchase/allCartPurchase}">
+                    <h3>Buy all!(<span th:text="${fullPrice}">Full price</span>)!</h3>
+                </a>
+            </div>
         </div>
         <div class="cart_item" th:each="item:${items}">
             <h3   style="width: 10%"    th:text="${item.id}">                   ITEM ID</h3>
@@ -39,7 +43,6 @@
             <h3   style="width: 15%"   th:text="${item.price}">             ITEM PRICE</h3>
             <h3   style="width: 15%"   th:text="${item.createdBy.username}">   CREATOR</h3>
             <div  style="width: 10%">
-
                 <div th:if="${item.available}" >
                     <a  th:href="@{cart/delete?id={id}(id=${item.id})}">
                         <img class="cart_item_image" th:src="@{images/trash.png}" alt="Trash image!" title="Delete from cart!"/>
