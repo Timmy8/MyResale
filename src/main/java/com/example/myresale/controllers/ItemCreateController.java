@@ -4,6 +4,8 @@ import com.example.myresale.DTOs.ItemCreateRequestDTO;
 import com.example.myresale.entities.Item;
 import com.example.myresale.entities.UserInfo;
 import com.example.myresale.services.ItemService;
+import com.example.myresale.telegramBOT.MyResaleNotificationBot;
+import com.example.myresale.telegramBOT.NotificationBot;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,10 +22,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/create")
 public class ItemCreateController {
-    private ItemService itemService;
+    private final ItemService itemService;
+    private final NotificationBot notificationBot;
 
-    public ItemCreateController(ItemService itemService) {
+    public ItemCreateController(ItemService itemService, MyResaleNotificationBot notificationBot) {
         this.itemService = itemService;
+        this.notificationBot = notificationBot;
     }
 
     @GetMapping
@@ -48,6 +52,7 @@ public class ItemCreateController {
             item.setCreatedBy(userInfo);
 
             Item createdItem = itemService.addItem(item);
+            notificationBot.sendTextToAllUsers("New item added!!!\nName: "+ item.getName() +" with price: " + item.getPrice());
 
             return "redirect:/items/" + createdItem.getId();
         }

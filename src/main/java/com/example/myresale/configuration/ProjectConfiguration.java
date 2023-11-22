@@ -1,7 +1,9 @@
 package com.example.myresale.configuration;
 
 import com.example.myresale.services.UserInfoDetailsService;
+import com.example.myresale.telegramBOT.MyResaleNotificationBot;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -14,11 +16,19 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 //CTRL + ALT + B -> посмотреть доступные реализации
 
 @Configuration
 public class ProjectConfiguration implements WebMvcConfigurer {
+    @Value("${telegram.bot.name}")
+    private String botToken;
+    @Value("${telegram.bot.token}")
+    private String botName;
+
     @Autowired
     @Lazy
     UserInfoDetailsService service;
@@ -34,11 +44,10 @@ public class ProjectConfiguration implements WebMvcConfigurer {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> {
                     request
-                            .requestMatchers("/", "/login", "/registration", "/logout", "/items/**", "/purchase/**").permitAll()
+                            .requestMatchers("/", "/login", "/registration", "/logout", "/items/**", "/purchase/**", "/api/**").permitAll()
                             .requestMatchers("/css/**", "/images/**").permitAll()
-                            .requestMatchers("/create", "/delete/**", "/cart/**", "/purchase/allCart").hasRole("USER")
-                            .requestMatchers(HttpMethod.POST, "/create/**").hasRole("USER")
-                            .requestMatchers(HttpMethod.POST, "api/items/**").hasRole("USER");
+                            .requestMatchers("/create", "/delete/**", "/cart/**", "/purchase/allCartPurchase").hasRole("USER")
+                            .requestMatchers(HttpMethod.POST, "/create/**").hasRole("USER");
                 })
                 .formLogin(form -> {
                     form
@@ -59,6 +68,7 @@ public class ProjectConfiguration implements WebMvcConfigurer {
         return http.build();
     }
 
+
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -68,6 +78,21 @@ public class ProjectConfiguration implements WebMvcConfigurer {
         return authenticationProvider;
     }
 
+    // Telegram bot API initialize
+    @Bean
+    public MyResaleNotificationBot initTelegramBot(){
+        MyResaleNotificationBot bot = new MyResaleNotificationBot(botName, botToken);
+        try{
+            var botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            botsApi.registerBot(bot);
+        } catch (TelegramApiException ex){
+            ex.printStackTrace();
+        }
+
+        return bot;
+    }
+
+    // WebMvcConfigures overrides
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**")

@@ -13,20 +13,24 @@
             <h1 sec:authorize="isFullyAuthenticated()"> Welcome back dear <span class="username" sec:authentication="name"> USERNAME </span>!                        </h1>
         </div>
 
-        <div class="corner_buttons">
-            <div class="left_corner_button">
+        <div class="top_navigation">
+            <div class="left_corner_buttons">
                 <a th:href="@{/create}"> <input type="submit" value="Add new item!"/> </a>
-                <a th:href="@{/delete}"> <input type="submit" value="Delete item! "/> </a>
+                <a href="https://t.me/my_resale_notification_bot"><input style="background-color: blue" type="submit" value="Join telegram!"/></a>
             </div>
 
-            <div class="right_corner_button">
+                <form th:method="GET" th:action="@{/items}" class="search_bar">
+                    <input id="search" type="text" th:name="keyword" placeholder="Search..."/>
+                </form>
+
+            <div class="right_corner_buttons">
                 <div sec:authorize="isAnonymous()">
                     <a th:href="@{/registration}"><input type="submit" value="Registration"/></a>
                     <a th:href="@{/login}"><input type="submit" value="Login"/></a>
                 </div>
                 <div sec:authorize="isFullyAuthenticated()">
                     <form method="get" th:action="@{/logout}"><input type="submit" value="Logout"/></form>
-                    <a th:href="@{/cart}"><input type="submit" value="Cart"/></a>
+                    <a th:href="@{/cart}"><input type="submit" value="Your cart"/></a>
                 </div>
             </div>
         </div>

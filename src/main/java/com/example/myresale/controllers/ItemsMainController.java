@@ -1,9 +1,13 @@
 package com.example.myresale.controllers;
 
+import com.example.myresale.entities.Item;
 import com.example.myresale.services.ItemService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/items")
@@ -15,8 +19,15 @@ public class ItemsMainController {
     }
 
     @GetMapping
-    public String findAllItems(Model model){
-        model.addAttribute("items", itemService.findAllItems());
+    public String findAllItems(@RequestParam(value = "keyword", required = false) String keyword, Model model){
+        List<Item> itemsList;
+
+        if (keyword != null)
+            itemsList = itemService.findAllItemsByKeyword(keyword);
+        else
+            itemsList = itemService.findAllItems();
+
+        model.addAttribute("items", itemsList);
         return "page_items_main.html";
     }
 

@@ -8,14 +8,13 @@
     <div class="welcome_title">
         <h1>Your cart:</h1>
     </div>
-    <div class="corner_buttons">
-        <div class="left_corner_button">
+    <div class="top_navigation">
+        <div class="left_corner_buttons">
             <a href="/items"> <input type="submit" value="Main page"/> </a>
         </div>
-        <div class="right_corner_button">
-            <div>
-                <form method="get" th:action="@{/cart/clear}"><input type="submit" value="Clear cart"/></form>
-            </div>
+
+        <div class="right_corner_buttons">
+            <form method="get" th:action="@{/cart/clear}"><input type="submit" value="Clear cart"/></form>
         </div>
     </div>
 
