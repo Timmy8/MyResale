@@ -5,8 +5,8 @@ import com.example.myresale.entities.Item;
 import com.example.myresale.entities.UserInfo;
 import com.example.myresale.services.ItemService;
 import com.example.myresale.telegramBOT.MyResaleNotificationBot;
+import com.example.myresale.telegramBOT.NotificationBot;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,16 +23,15 @@ import java.util.List;
 @RequestMapping("/create")
 public class ItemCreateController {
     private final ItemService itemService;
-    private final MyResaleNotificationBot bot;
+    private final NotificationBot notificationBot;
 
-    public ItemCreateController(ItemService itemService, MyResaleNotificationBot bot) {
+    public ItemCreateController(ItemService itemService, MyResaleNotificationBot notificationBot) {
         this.itemService = itemService;
-        this.bot = bot;
+        this.notificationBot = notificationBot;
     }
 
     @GetMapping
     public String itemCreateForm(){
-        bot.sendText("Hello friends!");
         return "form_item_creation.html";
     }
 
@@ -53,6 +52,7 @@ public class ItemCreateController {
             item.setCreatedBy(userInfo);
 
             Item createdItem = itemService.addItem(item);
+            notificationBot.sendTextToAllUsers("New item added!!!\nName: "+ item.getName() +" with price: " + item.getPrice());
 
             return "redirect:/items/" + createdItem.getId();
         }

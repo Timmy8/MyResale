@@ -12,9 +12,8 @@ import java.util.Date;
 @Setter
 @Builder
 @ToString
-public class TelegramBoutUser {
+public class TelegramBotUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
