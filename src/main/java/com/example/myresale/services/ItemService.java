@@ -13,16 +13,20 @@ import java.util.List;
 public class ItemService {
     private final ItemRepository repository;
 
-    public Item findItemById(long id){
-        return repository.findById(id).orElseThrow(()-> new ItemNotFoundException(id));
-    }
-
     public ItemService(ItemRepository repository) {
         this.repository = repository;
     }
 
+    public Item findItemById(long id){
+        return repository.findById(id).orElseThrow(()-> new ItemNotFoundException(id));
+    }
+
     public List<Item> findAllItems(){
         return repository.findAll();
+    }
+
+    public List<Item> findAllItemsByKeyword(String keyword){
+        return repository.findALlItemsByKeyword(keyword);
     }
 
     public boolean isAvailable(long id){

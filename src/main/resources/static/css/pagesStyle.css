@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
-html{
+html {
     height: 100%;
     width: 100%;
 }
@@ -29,17 +29,17 @@ a {
     text-decoration: none;
 }
 
-input{
+input {
     border-radius: 10px;
     background-color: cornsilk;
     font-weight: bold;
 }
-input:focus{
+input:focus {
     border-color: #719ECE;
     box-shadow: 0 0 10px #719ECE;
 }
 
-.items_list{
+.items_list {
     width: 100%;
     float: left;
     display: flex;
@@ -58,7 +58,13 @@ input:focus{
     width: 25%;
 }
 
-.cart_items_list{
+.item p, span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart_items_list {
     width: 100%;
     display: inline-block;
 }
@@ -73,7 +79,7 @@ input:focus{
     border-width: 1px;
 }
 
-.cart_preview{
+.cart_preview {
     display: flex;
     background-color: rgb(250, 250, 250, 90%);
     text-align: center;
@@ -84,7 +90,7 @@ input:focus{
     border-radius: 15px;
     border-width: 2px;
 }
-.cart_item h3, span{
+.cart_item h3, .cart_item span {
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -98,7 +104,7 @@ input:focus{
     border-radius: 10px;
     border-width: 1px;
 }
-.cart_item_image{
+.cart_item_image {
     width: 30px;
     height: 30px;
     margin-top: 15px;
@@ -132,24 +138,45 @@ input:focus{
     grid-template-columns: 25% 50% 25%;
 }
 
-.corner_buttons {
-    margin-left: 3%;
+
+.top_navigation {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    margin-left:  3%;
     margin-right: 3%;
 }
 
-.right_corner_button input{
-    font-size: 15px;
-    background-color: rgba(255, 248, 220, 0.9);
-    font-weight: bold;
-    float: right;
-    margin-right: 5px;
+.left_corner_buttons {
+    grid-column: 1;
 }
-.left_corner_button input{
-    font-size: 15px;
-    background-color: rgba(255, 248, 220, 0.9);
-    font-weight: bold;
+
+.left_corner_buttons a, .left_corner_buttons form {
+    margin-left: 1%;
     float: left;
-    margin-right: 5px
+    display: block;
+    text-align: center;
+}
+
+.right_corner_buttons {
+    grid-column: 3;
+}
+
+.right_corner_buttons a, .right_corner_buttons form {
+    margin-right: 1%;
+    float: right;
+    display: block;
+    text-align: center;
+}
+
+.search_bar {
+    text-align: center;
+}
+
+#search {
+    width: 50%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .username {
@@ -167,7 +194,7 @@ input:focus{
     display: grid;
 }
 
-.unavailable_item{
+.unavailable_item {
     margin-top: 15px;
     color: #891B04;
     font-size: 20px;

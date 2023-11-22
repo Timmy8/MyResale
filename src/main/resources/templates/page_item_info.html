@@ -6,10 +6,10 @@
 </head>
 <body>
     <h1>Item information:</h1>
-    <div class="corner_buttons">
-        <div class="left_corner_button">
+    <div class="top_navigation">
+        <li class="left_corner_buttons">
             <a href="/items"> <input type="submit" value="Main page"/> </a>
-        </div>
+        </li>
     </div>
     <div class="item_preview">
         <img class="book_image" th:src="@{/{imageURL}(imageURL=${item.imageURL})}" alt="Book image">

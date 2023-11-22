@@ -4,7 +4,9 @@ import com.example.myresale.DTOs.ItemCreateRequestDTO;
 import com.example.myresale.entities.Item;
 import com.example.myresale.entities.UserInfo;
 import com.example.myresale.services.ItemService;
+import com.example.myresale.telegramBOT.MyResaleNotificationBot;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +22,17 @@ import java.util.List;
 @Controller
 @RequestMapping("/create")
 public class ItemCreateController {
-    private ItemService itemService;
+    private final ItemService itemService;
+    private final MyResaleNotificationBot bot;
 
-    public ItemCreateController(ItemService itemService) {
+    public ItemCreateController(ItemService itemService, MyResaleNotificationBot bot) {
         this.itemService = itemService;
+        this.bot = bot;
     }
 
     @GetMapping
     public String itemCreateForm(){
+        bot.sendText("Hello friends!");
         return "form_item_creation.html";
     }
 

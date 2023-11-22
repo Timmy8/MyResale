@@ -50,7 +50,7 @@ public class ItemPurchaseController {
         return "form_item_purchase.html";
     }
 
-    @PostMapping("/{id}\\d+")
+    @PostMapping("/{id:\\d+}")
     public ResponseEntity<String> purchaseItem(@PathVariable("id") Long itemId,
                                                @ModelAttribute("deliveryAddress") DeliveryAddressCreateDTO dto,
                                                Authentication authentication){
@@ -73,5 +73,12 @@ public class ItemPurchaseController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body("Sorry, item is unavailable");
         }
+    }
+
+    @PostMapping("/allCart")
+    public ResponseEntity<String> purchaseAllCart(){
+
+
+        return ResponseEntity.ok().build();
     }
 }
