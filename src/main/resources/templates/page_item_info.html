@@ -7,9 +7,9 @@
 <body>
     <h1>Item information:</h1>
     <div class="top_navigation">
-        <li class="left_corner_buttons">
+        <div class="left_corner_buttons">
             <a href="/items"> <input type="submit" value="Main page"/> </a>
-        </li>
+        </div>
     </div>
     <div class="item_preview">
         <img class="book_image" th:src="@{/{imageURL}(imageURL=${item.imageURL})}" alt="Book image">
@@ -23,7 +23,7 @@
         <div th:if="${item.available}" class="buttons_container">
             <form method="post" th:action="@{/cart?id={id}(id=${item.id})}"> <input class="submit_input" type="submit" value="Add to cart!"/></form>
             <a th:href="@{/purchase/{id}(id=${item.id})}">                   <input class="submit_input" type="submit" value="Buy now!"/></a>
-            <a th:href="@{/delete/{id}(id=${item.id})}">                     <input type ="submit" value="Delete item!"/></a>
+            <!--<a th:href="@{/delete/{id}(id=${item.id})}">                     <input type ="submit" value="Delete item!"/></a> -->
        </div>
         <div th:unless="${item.available}" class="unavailable_item">
             <strong>Item unavailable!</strong>

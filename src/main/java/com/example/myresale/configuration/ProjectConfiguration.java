@@ -44,10 +44,12 @@ public class ProjectConfiguration implements WebMvcConfigurer {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> {
                     request
-                            .requestMatchers("/", "/login", "/registration", "/logout", "/items/**", "/purchase/**", "/api/**").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/delete/**").hasRole("MODERATOR")
+                            .requestMatchers(HttpMethod.POST, "/create/**").hasRole("USER")
+                            .requestMatchers("/logout", "/cart/**", "/purchase/allCartPurchase", "/create", "/delete").hasRole("USER")
+                            .requestMatchers("/login", "/registration").anonymous()
                             .requestMatchers("/css/**", "/images/**").permitAll()
-                            .requestMatchers("/create", "/delete/**", "/cart/**", "/purchase/allCartPurchase").hasRole("USER")
-                            .requestMatchers(HttpMethod.POST, "/create/**").hasRole("USER");
+                            .requestMatchers("/", "/items/**", "/purchase/**", "/api/**").permitAll();
                 })
                 .formLogin(form -> {
                     form
