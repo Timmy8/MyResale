@@ -3,16 +3,21 @@ package com.example.myresale.controllers;
 import com.example.myresale.DTOs.UserInfoCreateDTO;
 import com.example.myresale.entities.UserInfo;
 import com.example.myresale.components.UserRoleEnum;
+import com.example.myresale.exceptions.UserExistsException;
 import com.example.myresale.services.UserInfoDetailsService;
 import com.example.myresale.services.UserRoleService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Controller
@@ -31,7 +36,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String processRegistration( @ModelAttribute("UserInfoDTO") UserInfoCreateDTO userInfoDTO, Errors errors, Model model){
+    public String processRegistration(@ModelAttribute("UserInfoDTO")  UserInfoCreateDTO userInfoDTO, Errors errors, Model model){
         if (errors.hasErrors()) {
             List<String> errorsList = new ArrayList<>();
 
@@ -41,8 +46,12 @@ public class UserRegistrationController {
 
             return "page_registration.html";
         } else {
-
-            UserInfo userInfo = userInfoService.saveUserInfo(userInfoDTO);
+            try {
+                var userInfo = userInfoService.saveUserInfo(userInfoDTO);
+            } catch (UserExistsException ex){
+                model.addAttribute("errors", ex.getMessage());
+                return "page_registration.html";
+            }
 
             return "redirect:/login?registered=ok";
         }

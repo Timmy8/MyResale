@@ -12,4 +12,6 @@ import java.util.Optional;
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
     UserInfo findUserInfoByUsername(String username);
+    boolean existsUserInfoByUsername(String username);
+    boolean existsUserInfoByEmail(String email);
 }

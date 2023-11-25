@@ -1,7 +1,7 @@
 package com.example.myresale.configuration;
 
 import com.example.myresale.services.UserInfoDetailsService;
-import com.example.myresale.telegramBOT.MyResaleNotificationBot;
+import com.example.myresale.telegramBot.MyResaleNotificationBot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

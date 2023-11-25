@@ -1,4 +1,4 @@
-package com.example.myresale.telegramBOT;
+package com.example.myresale.telegramBot;
 
 public interface NotificationBot {
     void sendTextByChatId(Long chatId, String message);

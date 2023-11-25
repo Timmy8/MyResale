@@ -1,11 +1,13 @@
 package com.example.myresale.controllers.advices;
 
 import com.example.myresale.exceptions.ItemNotFoundException;
+import com.example.myresale.exceptions.UserExistsException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -46,6 +48,17 @@ public class GlobalControllerExceptionHandler {
                 .badRequest()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("Page not found!");
+    }
+
+    @ExceptionHandler(UserExistsException.class)
+    public ModelAndView UserExistsException(UserExistsException ex, HttpServletRequest request){
+        logger.info(ex.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView(request.getRequestURI());
+
+        modelAndView.addObject("errors", ex.getMessage());
+
+        return modelAndView;
     }
 
 }

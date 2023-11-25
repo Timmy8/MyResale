@@ -9,13 +9,13 @@ import com.example.myresale.repositories.PurchaseOrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PurchaseOrderService {
-    private PurchaseOrderRepository repository;
-    private ItemService itemService;
-    private DeliveryAddressService deliveryAddressService;
+    private final PurchaseOrderRepository repository;
+    private final ItemService itemService;
+    private final DeliveryAddressService deliveryAddressService;
 
     public PurchaseOrderService(PurchaseOrderRepository repository, ItemService itemService, DeliveryAddressService deliveryAddressService) {
         this.repository = repository;
@@ -27,19 +27,27 @@ public class PurchaseOrderService {
         return repository.findAllPurchaseOrderByUserInfoId(userInfoId);
     }
     @Transactional
-    public Long saveOrder(Long itemId, DeliveryAddressCreateDTO dto, UserInfo user){
-        Item item = itemService.findItemById(itemId);
-        item.setAvailable(false);
+    public Optional<Long> saveOrder(Set<Item> items, DeliveryAddressCreateDTO dto, UserInfo user){
+        Set<Item> itemsSet = new HashSet<>();
+        for (Item item : items)
+            if (itemService.isAvailable(item.getId())){
+                itemService.setItemAvailable(false, item.getId());
+                itemsSet.add(itemService.findItemById(item.getId()));
+            }
+
+        if (itemsSet.isEmpty())
+            return Optional.empty();
+
         DeliveryAddress address = deliveryAddressService.addDeliveryAddress(dto, user);
 
         PurchaseOrder order = PurchaseOrder.builder()
-                .item(item)
+                .items(itemsSet)
                 .deliveryAddress(address)
                 .userInfo(user)
                 .build();
 
         repository.save(order);
 
-        return order.getId();
+        return Optional.of(order.getId());
     }
 }
