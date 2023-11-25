@@ -1,4 +1,4 @@
-package com.example.myresale.telegramBOT;
+package com.example.myresale.telegramBot;
 
 import com.example.myresale.entities.TelegramBotUser;
 import com.example.myresale.repositories.TelegramBotUserRepository;

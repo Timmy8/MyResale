@@ -3,7 +3,6 @@ package com.example.myresale.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
@@ -22,24 +21,45 @@ public class UserInfo implements UserDetails {
 
     @Column(unique = true)
     private String username;
+
     private String password;
+
+    @Column(unique = true)
     private String email;
 
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private final Set<UserRole> roles = new HashSet<>();
+
+    // Reference to user's shopping cart
+    @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id", nullable = false, unique = true)
     private final UserCart userCart = new UserCart();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "createdBy")
+    // List of items created by the user
     @ToString.Exclude
-    List<Item> items = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "createdBy")
-    @ToString.Exclude
-    List<DeliveryAddress> deliveryAddresses = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
+    // List of delivery addresses added by the user
+    @ToString.Exclude
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "createdBy")
+    private List<DeliveryAddress> deliveryAddresses = new ArrayList<>();
+
+    public void addRole(UserRole role){
+        roles.add(role);
+    }
+
+    // User Details implementations
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return roles;
     }
 
     @Override

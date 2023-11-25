@@ -23,11 +23,11 @@ public class UserCart {
     @OneToOne(mappedBy = "userCart")
     private UserInfo user;
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(
-            name = "ITEM_FROM_CART",
-            joinColumns = {@JoinColumn(name = "user_cart_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")}
+            name = "item_from_cart",
+            joinColumns = @JoinColumn(name = "user_cart_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id")
     )
     private final Set<Item> items = new HashSet<>();
 
