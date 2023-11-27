@@ -29,6 +29,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+        </dependency>
+
         <!-- Dependencies for development -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

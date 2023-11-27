@@ -42,7 +42,7 @@ public class GlobalRESTController {
     }
 
     @GetMapping("/isAvailable/{id:\\d+}")
-    public ResponseEntity<Boolean> itemAvailableById(Long id){
+    public ResponseEntity<Boolean> itemAvailableById(@PathVariable("id") Long id){
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)

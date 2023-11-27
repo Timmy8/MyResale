@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/items")
 public class ItemsMainController {
-    private ItemService itemService;
+    private final ItemService itemService;
 
     public ItemsMainController(ItemService itemService) {
         this.itemService = itemService;

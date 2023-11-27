@@ -11,12 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/login")
 public class UserLoginController {
-    UserInfoDetailsService service;
-
-    public UserLoginController(UserInfoDetailsService service) {
-        this.service = service;
-    }
-
     @GetMapping
     public String loginPage(@RequestParam(value = "registered", required = false) String registered, Model model){
 

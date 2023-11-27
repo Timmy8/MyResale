@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(@ModelAttribute("UserInfoDTO")  UserInfoCreateDTO userInfoDTO, Errors errors, Model model){
+    public String processRegistration(@ModelAttribute("UserInfoDTO") @Valid UserInfoCreateDTO userInfoDTO, Errors errors, Model model){
         if (errors.hasErrors()) {
             List<String> errorsList = new ArrayList<>();
 
