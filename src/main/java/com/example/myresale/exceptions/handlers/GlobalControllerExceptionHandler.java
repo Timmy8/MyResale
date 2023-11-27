@@ -1,22 +1,15 @@
-package com.example.myresale.controllers.advices;
+package com.example.myresale.exceptions.handlers;
 
 import com.example.myresale.exceptions.ItemNotFoundException;
 import com.example.myresale.exceptions.UserExistsException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 @ControllerAdvice

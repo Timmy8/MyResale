@@ -1,11 +1,14 @@
 package com.example.myresale.util;
 
+import com.example.myresale.DTOs.DeliveryAddressCreateDTO;
 import com.example.myresale.DTOs.ItemCreateRequestDTO;
 import com.example.myresale.DTOs.UserInfoCreateDTO;
 import com.example.myresale.entities.UserInfo;
+import com.example.myresale.entities.UserRole;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class UsersAndDTOs {
     public static UserInfoCreateDTO validUserDto(){
@@ -16,7 +19,10 @@ public class UsersAndDTOs {
         return new UserInfoCreateDTO("", "", "");
     }
     public static UserInfo validUserInfo(){
-        return new UserInfo(1L,"Username", "Password", "email@gmail.com",new ArrayList<>(), new ArrayList<>());
+        var user = new UserInfo(1L, "username", "password", "email", new ArrayList<>(), new ArrayList<>());
+        user.addRole(new UserRole(1L, "ROLE_USER", new HashSet<>()));
+
+        return user;
     }
 
     public static ItemCreateRequestDTO validCreateRequestDto(){
@@ -25,5 +31,9 @@ public class UsersAndDTOs {
 
     public static ItemCreateRequestDTO invalidCreateRequestDto() {
         return new ItemCreateRequestDTO();
+    }
+
+    public static DeliveryAddressCreateDTO validDeliveryAddress(){
+        return new DeliveryAddressCreateDTO("1","1","1","1","1","1" );
     }
 }
