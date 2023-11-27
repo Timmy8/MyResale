@@ -7,7 +7,8 @@ import lombok.Getter;
 public class UserExistsException extends RuntimeException {
     private final String message;
 
-    protected UserExistsException(String message) {
+    public UserExistsException(){message = "User already exists!";}
+    public UserExistsException(String message) {
         this.message = message;
     }
 }

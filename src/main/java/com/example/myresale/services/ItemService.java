@@ -29,7 +29,7 @@ public class ItemService {
         return repository.findALlItemsByKeyword(keyword);
     }
 
-    public boolean isAvailable(long id){
+    public Boolean isAvailable(long id){
         return findItemById(id).isAvailable();
     }
 

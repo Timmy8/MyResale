@@ -18,8 +18,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/cart")
 public class UserCartController {
-    private UserCartService userCartService;
-    private PurchaseOrderService purchaseOrderService;
+    private final UserCartService userCartService;
+    private final PurchaseOrderService purchaseOrderService;
 
     public UserCartController(UserCartService userCartService, PurchaseOrderService purchaseOrderService) {
         this.userCartService = userCartService;
@@ -68,7 +68,7 @@ public class UserCartController {
     public String userPurchases(Authentication auth, Model model){
         var userPurchsesList = purchaseOrderService.findAllOrdersByUserId(authenticationToUserId(auth));
 
-        model.addAttribute("n", userPurchsesList);
+        model.addAttribute("purchases", userPurchsesList);
 
         return "page_user_purchases.html";
     }
