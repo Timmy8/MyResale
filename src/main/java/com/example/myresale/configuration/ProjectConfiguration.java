@@ -41,7 +41,7 @@ public class ProjectConfiguration implements WebMvcConfigurer {
                     request
                             .requestMatchers(HttpMethod.POST, "/delete/**").hasRole("MODERATOR")
                             .requestMatchers(HttpMethod.POST, "/create/**").hasRole("USER")
-                            .requestMatchers("/logout", "/cart/**", "/purchase/allCartPurchase", "/create", "/delete").hasRole("USER")
+                            .requestMatchers("/logout", "/cart/**", "/purchase/allCartPurchase", "/create", "/delete/**").hasRole("USER")
                             .requestMatchers("/login", "/registration").anonymous()
                             .requestMatchers("/css/**", "/images/**").permitAll()
                             .requestMatchers("/", "/items/**", "/purchase/**", "/api/**").permitAll();

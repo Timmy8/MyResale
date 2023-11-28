@@ -5,6 +5,7 @@ import com.example.myresale.entities.UserInfo;
 import com.example.myresale.services.DeliveryAddressService;
 import com.example.myresale.services.ItemService;
 import com.example.myresale.services.PurchaseOrderService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -57,7 +58,7 @@ public class ItemPurchaseController {
         var orderId = purchaseOrderService.saveOrder(Set.of(item), dto, user);
 
         return orderId.map(id -> ResponseEntity
-                .ok()
+                .status(HttpStatus.CREATED)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("Thank you for your purchase\nPurchase number - " + id)).orElseGet(() -> ResponseEntity
                 .badRequest()
@@ -74,7 +75,7 @@ public class ItemPurchaseController {
         var orderId = purchaseOrderService.saveOrder(user.getUserCart().getAllItemsFromCart(), dto, user);
 
         return orderId.map(id -> ResponseEntity
-                .ok()
+                .status(HttpStatus.CREATED)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("Thank you for your purchase\nPurchase number - " + id)).orElseGet(() -> ResponseEntity
                 .badRequest()

@@ -60,4 +60,8 @@ public class UserInfoDetailsService implements UserDetailsService {
 
         return repository.save(userInfo);
     }
+
+    public void addRole(String username, UserRoleEnum role){
+        repository.findUserInfoByUsername(username).addRole(roleService.findRoleByName(role.name()));
+    }
 }

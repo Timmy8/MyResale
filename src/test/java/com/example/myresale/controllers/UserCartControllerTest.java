@@ -4,7 +4,7 @@ import com.example.myresale.configuration.TelegramBotConfiguration;
 import com.example.myresale.services.PurchaseOrderService;
 import com.example.myresale.services.UserCartService;
 import com.example.myresale.util.ItemsRepo;
-import com.example.myresale.util.UserRepo;
+import com.example.myresale.util.UsersAndDTOs;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -35,7 +35,7 @@ public class UserCartControllerTest {
     public void cartView_ReturnStatusOkValidViewAndValidItems() throws Exception{
         // given
         var items = ItemsRepo.items();
-        var user = UserRepo.validUser();
+        var user = UsersAndDTOs.validUserInfo();
         when(cartService.getAllItemsFromUserCart(user.getId())).thenReturn(Set.copyOf(items));
 
         // when
@@ -53,7 +53,7 @@ public class UserCartControllerTest {
     public void addItem_ReturnStatusFoundAndValidRedirect () throws Exception{
         // given
         var item = ItemsRepo.item();
-        var user = UserRepo.validUser();
+        var user = UsersAndDTOs.validUserInfo();
 
         // when
         var result = mvc.perform(post("/cart").param("id",item.getId().toString()).with(user(user)));
@@ -66,7 +66,7 @@ public class UserCartControllerTest {
     @Test
     public void clearCart_ReturnStatusFoundAndValidRedirect () throws Exception{
         // given
-        var user = UserRepo.validUser();
+        var user = UsersAndDTOs.validUserInfo();
 
         // when
         var result = mvc.perform(get("/cart/clear").with(user(user)));
@@ -80,7 +80,7 @@ public class UserCartControllerTest {
     public void deleteItem_ReturnStatusFoundAndValidRedirect () throws Exception{
         // given
         var item = ItemsRepo.item();
-        var user = UserRepo.validUser();
+        var user = UsersAndDTOs.validUserInfo();
 
         // when
         var result = mvc.perform(get("/cart/delete").param("id",item.getId().toString()).with(user(user)));
@@ -93,7 +93,7 @@ public class UserCartControllerTest {
     @Test
     public void userPurchases_ReturnStatusOkAndValidView () throws Exception{
         // given
-        var user = UserRepo.validUser();
+        var user = UsersAndDTOs.validUserInfo();
 
         // when
         var result = mvc.perform(get("/cart/purchases").with(user(user)));

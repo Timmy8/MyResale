@@ -3,16 +3,12 @@ package com.example.myresale.controllers;
 import com.example.myresale.configuration.TelegramBotConfiguration;
 import com.example.myresale.services.ItemService;
 import com.example.myresale.telegramBot.MyResaleNotificationBot;
-import com.example.myresale.telegramBot.NotificationBot;
 import com.example.myresale.util.ItemsRepo;
-import com.example.myresale.util.UserRepo;
 import com.example.myresale.util.UsersAndDTOs;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -49,7 +45,7 @@ public class ItemCreateControllerTest {
     public void createItem_WithValidCreateItemRequestDto_ReturnStatusOkAndValidRedirect() throws Exception{
         // given
         var item = ItemsRepo.item();
-        var user = UserRepo.validUser();
+        var user = UsersAndDTOs.validUserInfo();
         var createItemDto = UsersAndDTOs.validCreateRequestDto();
 
         // when
@@ -66,7 +62,7 @@ public class ItemCreateControllerTest {
     @Test
     public void createItem_WithInvalidCreateItemRequestDto_ReturnStatusOkAndValidView() throws Exception{
         // given
-        var user = UserRepo.validUser();
+        var user = UsersAndDTOs.validUserInfo();
         var createItemDto = UsersAndDTOs.invalidCreateRequestDto();
 
         // when

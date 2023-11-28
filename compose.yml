@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  db_mysql_8:
+    image: mysql:8.0.35
+    environment:
+      MYSQL_DATABASE: my_resale_local
+      MYSQL_ROOT_PASSWORD: developer
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: developer
+    ports:
+      - '3307:3306'
