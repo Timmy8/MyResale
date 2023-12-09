@@ -25,7 +25,7 @@ If ***you have*** your own database, change **Database Properties** to yours:
 > 
 > spring.datasource.password=**'your database password'**
 
-For adding admin user, change **Admin Data**:
+To add your own admin user, change **Admin Data**:
 >security.admin.login=**'your login'**
 > 
 > security.admin.password=**'your password'**
