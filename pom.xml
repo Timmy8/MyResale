@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>MyResale</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>4.0.4-SNAPSHOT</version>
     <name>MyResale</name>
     <description>MyResale</description>
     <properties>
@@ -32,6 +32,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- Uncomment if you need docker compose
@@ -39,7 +40,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-docker-compose</artifactId>
             <optional>true</optional>
-        </dependency> -->
+        </dependency>  -->
 
         <!-- Dependencies for development -->
         <dependency>
