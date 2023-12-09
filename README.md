@@ -13,6 +13,8 @@
 
 - ***Spring docker compose*** for docker.
 
+- All tests created with ***spring starter test*** and ***spring security test***.
+
 ### information about the start of the project (Application properties)
 
 If you ***don't have*** your own database, 
