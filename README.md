@@ -15,7 +15,7 @@
 
 - All tests created with ***spring starter test*** and ***spring security test***.
 
-### information about the start of the project (Application properties)
+### information about the start of the project (application.properties)
 
 If you ***don't have*** your own database, 
 uncomment ***docker compose dependency*** in ***pom.xml*** file.
