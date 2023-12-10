@@ -17,7 +17,7 @@
 
 ### information about the start of the project (application.properties)
 
-If you ***don't have*** your own database, 
+If you use ***docker*** , 
 uncomment ***docker compose dependency*** in ***pom.xml*** file.
 
 If ***you have*** your own database, change **Database Properties** to yours:
