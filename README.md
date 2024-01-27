@@ -27,6 +27,8 @@ If ***you have*** your own database, change **Database Properties** to yours:
 > 
 > spring.datasource.password=**'your database password'**
 
+Or **use docker compose (pom.xml section)**
+
 To add your own admin user, change **Admin Data**:
 >security.admin.login=**'your login'**
 > 
